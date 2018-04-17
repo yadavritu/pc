@@ -9202,7 +9202,6 @@ body.index-template section.home-gallery-layout .home-gallery-content .gallery-i
 body:not(.index-template) .breadcrumb {
     padding: 7px 15px;
     padding-right: 0;
-    padding-left: 200px;
     margin-bottom: 0;
     background-color: transparent;
     display: -webkit-flex;

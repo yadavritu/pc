@@ -550,7 +550,7 @@ class Pizza extends CI_Controller
 	public function order()
 	{
 		$this->head("");
-		$a['action']=base_url("Pizza_hut/order_insert");
+		$a['action']=base_url("pc/order_insert");
 		$this->load->view('user/order');
 		$this->footer("");
 	}

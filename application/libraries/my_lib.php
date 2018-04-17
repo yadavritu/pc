@@ -150,7 +150,7 @@ class My_lib
 		$ci->email->set_newline("\r\n");
 		$ci->email->from("tcs201718@gmail.com");
 		$ci->email->to($a);
-		$ci->email->message('<a href="http://localhost/Pizza_hut/My_pizza/c_password/?email='.$a.'">Click here</a>');
+		$ci->email->message('<a href="/pc/My_pizza/c_password/?email='.$a.'">Click here</a>');
 		if($ci->email->send())
 		{
 			echo "send mail";

@@ -19,7 +19,7 @@ class pizza_lib
 		$ci->email->set_newline("\r\n");
 		$ci->email->from("tcs201718@gmail.com");
 		$ci->email->to($a);
-		$ci->email->message('<a href="http://localhost/Pizza_hut/Pizza/c_password/?email='.$a.'">Click here</a>');
+		$ci->email->message('<a href="http://pizzacorner.local/Pizza/c_password/?email='.$a.'">Click here</a>');
 		if($ci->email->send())
 		{
 			echo "send mail";
