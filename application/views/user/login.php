@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="canonical" href="http://demo.designshopify.com/" />
+	<link rel="canonical" href="" />
 	<meta name="theme-color" content="#7796A8">
 	<meta name="description" content="" />
 	<title>
@@ -89,7 +89,7 @@
 									<div class="nav-logo">
 										<?php foreach($logo as $l) {?>
 											<?= $l->logo_image;?>
-											<h1 style="display:none"><a href="http://demo.designshopify.com/">Fast Food</a></h1>
+											<h1 style="display:none"><a href="/">Pizza Corner</a></h1>
 										<?php } ?>
 										</div>
 									<div class="nav-top">
@@ -409,7 +409,7 @@
 												<input type="password" value="" placeholder="Password" required name="tpassword" id="customer_password" class="text" size="16" >
 												<span class="cs-icon icon-eye"></span>
 											</div>
-											<div class="g-recaptcha" data-sitekey="6Ldj41IUAAAAAEwJCN0_6lcCsRxKAY3wxbwbMzAF" ></div>
+											<div class="g-recaptcha" data-sitekey="6Lfm0lMUAAAAALibANdhec5zXl3452OygvLE3JVQ" ></div>
 												<div id="html_element"></div>
 											<div class="clearfix">
 												<a class="note" href="<?=base_url();?>Pizza/forget_pass" onclick="showRecoverPasswordForm();return false;">Forgot your password?</a>

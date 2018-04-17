@@ -138,7 +138,7 @@
 											<div class="icon_accounts">
 												<div class="m_login-account">
 													<span class="dropdown-toggle login-icon">
-														<i class="fa fa-user"></i><?php print_r($sess['User_name']) ?>
+														<i class="fa fa-user"></i><?php echo(ucfirst($sess['User_name'])) ?>
 														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
 														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
 													</span>
