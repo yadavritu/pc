@@ -1,4 +1,4 @@
-	<?php
+<?php
 class My_model extends CI_model
 {
 	public function insert_Data($tbl,$data)
