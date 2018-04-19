@@ -521,3 +521,17 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+/****Store Information****/
+$config['store_address'] = array(
+	'address'  	=> '401/7 Aalay Complex, Near Puna patia',
+	'city'  	=> 'Surat',
+	'state'  	=> 'Gujarat',
+	'country'  	=> 'India',
+	'pincode'  	=> '395006',
+	'latitude'  => '21.1907137',
+	'longitude' => '72.8703958',
+	'free_km' 	=> 1,
+	'per_km_cost' => 10,
+);

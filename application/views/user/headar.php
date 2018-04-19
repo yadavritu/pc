@@ -2,12 +2,10 @@
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
-<!-- Mirrored from demo.designshopify.com/html_fastfood/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2018 11:38:49 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="canonical" href="http://demo.designshopify.com/" />
 	<meta name="theme-color" content="#7796A8">
 	<meta name="description" content="" />
 	<title>
@@ -70,7 +68,7 @@
 <!-- /WhatsHelp.io widget -->
 </head>
 
-<body class="index-template  fastfood_1" >
+<body class="<?php echo !empty($homepage)?"index-template":""?>  fastfood_1" >
 
 	<!--Header-->
 	<header id="top" class="header clearfix">
@@ -85,7 +83,7 @@
 									<!--	<a href="index.html"><img src="<?= base_url(); ?>assets_client/images/logo.png" alt="" title="Fast Food" /></a>-->
 										<?php foreach($logo as $l) {?>
 											<?= $l->logo_image;?>
-											<h1 style="display:none"><a href="http://demo.designshopify.com/">Fast Food</a></h1>
+											<h1 style="display:none"><a href="http://demo.designshopify.com/">Pizza Corner</a></h1>
 										<?php } ?>
 									</div>
 									<div class="nav-top">
@@ -139,65 +137,35 @@
 											<div class="icon_accounts">
 												<div class="m_login-account">
 													<span class="dropdown-toggle login-icon">
-														<i title="user" class="fa fa-user"></i><?php echo(ucfirst($sess['User_name'])) ?>
+														<i title="user" class="fa fa-user"> <?php echo(ucfirst($sess['User_name'])) ?></i>
 														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
 														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
 													</span>
 													<div class="m_dropdown-login dropdown-menu login-content">
 														<div class="clearfix">
 															<div class="login-register-content">
-																	<ul class="nav nav-tabs">
+																<ul class="nav nav-tabs">
 																<?php if($sess==''){ ?>
 																	<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/login" >
-																			Login
-																		</a>
+																		<?php echo anchor('Pizza/login', 'Login') ?>
 																	</li>
 																<?php } else { ?>
-																<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/logout_session" >
-																			Logout
-																		</a>
-																	</li>
-																<?php } ?>
-																
-																</ul>
-															</div>
-													</div>
-												</div>
-											</div>
-										</div>
-											<div class="icon_accounts">
-												<div class="m_login-account">
-													<span class="dropdown-toggle login-icon">
-														<i title="profile" class="fa fa-user"></i>
-														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
-														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
-													</span>
-													<div class="m_dropdown-login dropdown-menu login-content">
-														<div class="clearfix">
-															<div class="login-register-content">
-																	<ul class="nav nav-tabs">
-																
 																	<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/profile" >
-																		Profile
-																		</a>
+																		<?php echo anchor('Pizza/profile', 'My Profile') ?>
+																	</li>																
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/change_password', 'Change Password') ?>
 																	</li>
-																
-																<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/change_password" >
-																			Change password
-																		</a>
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/logout_session', 'Logout') ?>
 																	</li>
-																
-																
+																<?php } ?>																
 																</ul>
 															</div>
+														</div>
 													</div>
 												</div>
-											</div>
-										</div>
+											</div>											
 										</div>
 						
 									</div>

@@ -3,11 +3,11 @@ class Pizza extends CI_Controller
 {
 	public function index()
 	{
-	if($this->input->get('false')=='false')
+		if($this->input->get('false')=='false')
 		{
 			echo '<script>alert("Already in Wishlist")</script>';
 		}
-		$this->head();
+		$this->head(1);
 		$this->dash();
 		$this->footer();
 	}
@@ -26,7 +26,7 @@ class Pizza extends CI_Controller
 	}	
 
 
-	public function head()
+	public function head($homepage=false)
 	{	
 		$q2['sess']=$this->session->userdata('clinte');
 		
@@ -35,6 +35,7 @@ class Pizza extends CI_Controller
 		$q1=$this->db->query("select * from menu where m_status='unblock'");
 		$q2['menu']=$q1->result();
 		$q2['this1']=$this;
+		$q2['homepage']= $homepage ;
 		$this->load->view("user/headar",$q2);
 	}
 	public function sub_head($a)
@@ -56,7 +57,7 @@ class Pizza extends CI_Controller
 		
 		
 		
-		$r['slider']=$this->pizza_model->select_Data('banner','b_status');
+		$r['slider']=$this->pizza_model->select_Data('banner','b_status');		
 		$this->load->view("user/dash",$r);
 	}
 	public function footer()
@@ -336,11 +337,11 @@ class Pizza extends CI_Controller
 	{
 		
 		$data=array(
-		 "id"=>$this->input->post("id"),
-		 "name"=>$this->input->post("name"),
-		 "price"=>$this->input->post("price"),
-		 "img"=>$this->input->post("img"),
-		 'qty'=>1
+			 "id"=>$this->input->post("id"),
+			 "name"=>$this->input->post("name"),
+			 "price"=>$this->input->post("price"),
+			 "img"=>$this->input->post("img"),
+			 'qty'=>1
 		);
 		
 		
@@ -370,72 +371,17 @@ class Pizza extends CI_Controller
 			
 		redirect(base_url()."Pizza/show_cart");
 	}
-	public function show_Cart()
-	{
-		 
-		 if($this->session->userdata("clinte"))
-		 {
-			 $id=$this->session->userdata("clinte");
-			 $a['user_id']=$id['Admin_ID'];
-		 }
-		 else
-		 {
-		/*  $l=$this->db->query("select * from  logo where l_status='unblock'");
-		 $a['logo']=$l->result();	
-		 $r=$this->db->query("select * from menu where m_status='unblock'");
-		 $a['menu']=$r->result();
-		 $a['this1']=$this;
-		 $this->load->view('user/cart',$a);
-		 $this->footer(); 
-		 */// redirect(base_url()."pizza");
-		 }
-		 $a['sess']=$this->session->userdata('clinte');	
-		  $l=$this->db->query("select * from  logo where l_status='unblock'");
-		 $a['logo']=$l->result();	
-		 $r=$this->db->query("select * from menu where m_status='unblock'");
-		 $a['menu']=$r->result();
-		 $a['this1']=$this;
-		 $this->load->view('user/cart',$a);
-		 $this->footer(); 
-		
-			//redirect(base_url()."pizza");
+	public function show_Cart(){
+		$data['sess']=$this->session->userdata('clinte');	
+		$l=$this->db->query("select * from  logo where l_status='unblock'");
+		$data['logo']=$l->result();	
+		$r=$this->db->query("select * from menu where m_status='unblock'");
+		$data['menu']=$r->result();
+		$data['this1']=$this;
+		$data['order']=$this->session->userdata('order');
+		$this->load->view('user/cart',$data);
+		$this->footer(); 
 	}
-	
-		
-	function buy($id)
-	{
-		 $sess=$this->session->userdata("clinte");
-		$val=$sess['Admin_ID'];
-		 if(!$val)
-		 {
-			//echo "login frist";
-			 redirect(base_url()."Pizza/login/?login=true");
-		 }
-		 else
-		 {
-        //Set variables for paypal form
-        $returnURL = base_url().'Pizza/success'; //payment success url
-        $cancelURL = base_url().'Pizza/cancel'; //payment cancel url
-        $notifyURL = base_url().'Pizza/ipn'; //ipn url
-        //get particular product data
-        $product = $this->pizza_model->getRows($id);
-        $userID = $id; //current user id
-        $logo = base_url().'assets/images/codexworld-logo.png';
-        
-        $this->paypal_lib->add_field('return', $returnURL);
-        $this->paypal_lib->add_field('cancel_return', $cancelURL);
-        $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', $product['p_name']);
-        $this->paypal_lib->add_field('custom', $userID);
-        $this->paypal_lib->add_field('item_number',  $product['p_id']);
-        $this->paypal_lib->add_field('amount',  $product['p_price']);        
-        $this->paypal_lib->image($logo);
-        
-        $this->paypal_lib->paypal_auto_form();
-		
-		 }
-		 
-    }
 	public function store_cookies($a)
 	 {
 		 foreach($a as $v)
@@ -640,8 +586,6 @@ class Pizza extends CI_Controller
 		 $this->pizza_model->update_password_change($p2,$oid);
 		 redirect(base_url()."pizza/login");
 	
-	} 
-	
-	
+	}
 }
 ?>

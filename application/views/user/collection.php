@@ -123,70 +123,37 @@
 											</div>
 											<div class="icon_accounts">
 												<div class="m_login-account">
-													<span class="dropdown-toggle login-icon" data-toggle="dropdown">
-														<i class="fa fa-user"></i><?php print_r($sess['User_name']) ?>
+													<span class="dropdown-toggle login-icon">
+														<i title="user" class="fa fa-user"> <?php echo(ucfirst($sess['User_name'])) ?></i>
 														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
 														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
 													</span>
 													<div class="m_dropdown-login dropdown-menu login-content">
 														<div class="clearfix">
-															
-															
 															<div class="login-register-content">
 																<ul class="nav nav-tabs">
-																
 																<?php if($sess==''){ ?>
 																	<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/login" >
-																			Login
-																		</a>
+																		<?php echo anchor('Pizza/login', 'Login') ?>
 																	</li>
 																<?php } else { ?>
-																<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/logout_session" >
-																			Logout
-																		</a>
-																	</li>
-																<?php } ?>
-																
-																</ul>
-																</div>
-																</div>
-															</div>
-												</div>
-											</div>
-												
-											<div class="icon_accounts">
-												<div class="m_login-account">
-													<span class="dropdown-toggle login-icon">
-														<i title="profile" class="fa fa-user"></i>
-														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
-														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
-													</span>
-													<div class="m_dropdown-login dropdown-menu login-content">
-														<div class="clearfix">
-															<div class="login-register-content">
-																	<ul class="nav nav-tabs">
-																
 																	<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/profile" >
-																		Profile
-																		</a>
+																		<?php echo anchor('Pizza/profile', 'My Profile') ?>
+																	</li>																
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/change_password', 'Change Password') ?>
 																	</li>
-																
-																<li class="account-item-title active">
-																		<a href="<?=base_url();?>Pizza/change_password" >
-																			Change password
-																		</a>
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/logout_session', 'Logout') ?>
 																	</li>
-																
-																
+																<?php } ?>																
 																</ul>
+																</div>
 															</div>
+														</div>
 													</div>
-												</div>
+												</div>											
 											</div>
-										</div>
 										</div>
 									</div>
 									<div class="navMobile-navigation">

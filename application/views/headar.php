@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
-	
-<!-- Mirrored from www.native-theme.com/pongo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jan 2018 09:56:25 GMT -->
 <head>
 		<title>Pizza_coner | Admin </title>
-		
-		
 		<meta charset="utf-8">
 		<meta content="ie=edge" http-equiv="x-ua-compatible">
 		<meta content="template language" name="keywords">

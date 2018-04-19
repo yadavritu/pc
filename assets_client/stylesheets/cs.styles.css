@@ -9260,7 +9260,7 @@ body:not(.index-template) .breadcrumb>span:last-child * {
 
 body:not(.index-template) .heading-content {
     background-color: transparent;
-    margin-bottom: 50px
+    margin-bottom: 30px
 }
 
 body:not(.index-template) .heading-content:before {
@@ -15777,7 +15777,7 @@ body:not(.index-template) section.cart-content table tbody tr {
 body:not(.index-template) section.cart-content table tbody tr td {
     text-align: center;
     vertical-align: middle;
-    padding: 30px
+    padding: 10px
 }
 
 @media only screen and (max-width: 991px) {
@@ -19000,15 +19000,16 @@ header .m_login-account {
 header .m_login-account .login-icon {
     border: 1px solid #fff;
     height: 35px;
-    width: 35px;
+    width: 100%;
     line-height: 37px;
     text-align: center;
     border-radius: 4px;
-    display: block
+    display: block;
+	padding:0 5px;
 }
 
 header .m_login-account .dropdown-menu.m_dropdown-login {
-    width: 320px;
+    width: 220px;
     background-color: transparent;
     right: 0;
     left: auto;
@@ -19054,7 +19055,7 @@ header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content:
 
 header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content .nav-tabs {
     border-bottom: 0;
-    text-align: center;
+    text-align: left;
     margin: 0;
     margin-bottom: 17px
 }
@@ -19078,7 +19079,8 @@ header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content 
     border: 0;
     padding: 0;
     margin: 0;
-    letter-spacing: 0.5px
+    letter-spacing: 0.5px;
+	cursor:pointer;
 }
 
 header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content .nav-tabs li:hover a,header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content .nav-tabs li.active a {
@@ -19089,7 +19091,7 @@ header .m_login-account .dropdown-menu.m_dropdown-login .login-register-content 
     content: '';
     width: 1px;
     height: 10px;
-    background-color: #b0b0b0;
+    background-color: #000;
     position: absolute;
     top: 50%;
     left: -2px;
