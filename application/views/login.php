@@ -27,7 +27,7 @@
 		$(document).ready(function(){
 			//alert("hello");
 			$("#mail_check").blur(function(){
-				$("#msg").html("<img src='<?=base_url();?>banner_img/loader.gif' height='50' width='50'>")
+				$("#msg").html("<img src='<?=base_url();?>uploads/banner_img/loader.gif' height='50' width='50'>")
 			$.ajax({
 				url:"<?=base_url();?>My_pizza/mail_check1",
 				method:"post",
@@ -72,10 +72,10 @@
 					</div>
 					<div class=" auth-link sm-max sm-mgtop-20">
 					<?php if($this->input->get('email')=='unsuccess'){ ?>
-						<h1 style="color:red;font-size:30px;">NOT LOGIN </h1>
+						<h1 style="color:red;font-size:30px;">Not match Password </h1>
 						<?php } ?>
 						<?php if($this->input->get('email')=='invalid_email'){ ?>
-						<h1 style="color:red;font-size:30px;">Email Not Match </h1>
+						<h1 style="color:red;font-size:30px;"> Not  Email Match </h1>
 						<?php } ?>
 					</div>
 				</div>

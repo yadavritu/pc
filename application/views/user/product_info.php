@@ -93,6 +93,7 @@
 									<!--submenu fetch end -->
 									</li>
 									<?php } ?>
+									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
 									</ul>
 										</div>
 										<div class="nav-icon">
@@ -134,6 +135,37 @@
 																
 																</ul>
 																</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="icon_accounts">
+												<div class="m_login-account">
+													<span class="dropdown-toggle login-icon">
+														<i title="profile" class="fa fa-user"></i>
+														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+													</span>
+													<div class="m_dropdown-login dropdown-menu login-content">
+														<div class="clearfix">
+															<div class="login-register-content">
+																	<ul class="nav nav-tabs">
+																
+																	<li class="account-item-title active">
+																		<a href="<?=base_url();?>Pizza/profile" >
+																		Profile
+																		</a>
+																	</li>
+																
+																<li class="account-item-title active">
+																		<a href="<?=base_url();?>Pizza/change_password" >
+																			Change password
+																		</a>
+																	</li>
+																
+																
+																</ul>
+															</div>
 													</div>
 												</div>
 											</div>
@@ -720,20 +752,15 @@ $(document).ready(function(){
 													<ul class="nav nav-tabs tabs-left sideways">
 														<li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
 														<li><a href="#review" data-toggle="tab">Reviews</a></li>
-														<li><a href="#shipping" data-toggle="tab">Shipping Details</a></li>
-														<li><a href="#payment" data-toggle="tab">Payment Info</a></li>
-													</ul>
+														</ul>
 												</div>
 												<div class="col-md-12 tabs-content">
 													<div class="tab-content">
 														<div class="tab-pane active" id="desc">
-															<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
+															<p>Lorem Ipsum. </p>
 															<ul class="angle-right">
 																<li>Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.</li>
-																<li>Aenean sollicitudin, lorem quis bibendum auctor</li>
-																<li>Nisi elit consequat ipsum, nec sagittis sem nibh id elit</li>
-																<li>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris</li>
-															</ul>
+																</ul>
 														</div>
 														<div class="tab-pane fade " id="review">
 															<div id="customer_review">
@@ -822,24 +849,7 @@ $(document).ready(function(){
 																</div>
 															</div>
 														</div>
-														<div class="tab-pane fade " id="shipping">
-															<div class="shipping-item">
-																<p class="item-title">Returns Policy</p>
-																<p class="item-desc">
-																	Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.
-																	<br> Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.
-																</p>
-															</div>
-															<div class="shipping-item">
-																<p class="item-title">Shipping</p>
-																<p class="item-desc">
-																	Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit.
-																</p>
-															</div>
-														</div>
-														<div class="tab-pane fade " id="payment">
-															Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.
-														</div>
+														
 													</div>
 												</div>
 											</div>
@@ -1555,7 +1565,7 @@ $(document).ready(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Hurry !!!!!</h4>
+          <h4 class="modal-title"> Add cart</h4>
         </div>
         <div class="modal-body">
           <p class="" id="getmsg"></p>

@@ -43,6 +43,24 @@ class pizza_lib
 			return false;
 		}
 	}
+		public function image_upload($img_name)
+	{
+		$ci=& get_instance();
+		$fi['upload_path']="uploads/reg_img/";
+		$fi['allowed_types']="jpeg|bmp|png|gif|jpg|";
+		$fi['max_size']=7000;
+		$fi['encrypt_name']=TRUE;
+		$fi['remove_space']=TRUE;
+		$ci->load->library('upload',$fi);
+		if(!$ci->upload->do_upload($img_name))
+		{
+			echo $ci->upload->display_errors();
+		}
+		else
+		{
+			return $ci->upload->data();
+		}
+	}
 	
 	
 	

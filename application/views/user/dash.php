@@ -131,7 +131,7 @@
 																			<div class="product-ajax-cart">
 																				<span class="overlay_mask"></span>
 																				<div data-handle="juice-ice-tea" data-target="#quick-shop-modal" class="quick_shop" data-toggle="modal">
-																					<a class=""><span class="cs-icon icon-eye"></span></a>
+																					<a href="<?=base_url();?>Pizza/product_info/?pid=<?= $pmenu->p_id;?>" class=""><span class="cs-icon icon-eye"></span></a>
 																				</div>
 																			</div>
 																		</li>
@@ -142,9 +142,16 @@
 																</div>
 																<form action="" method="post">
 																	<div class="effect-ajax-cart">
-																		<input type="hidden" name="quantity" value="1">
-																		<button class="_btn add-to-cart" data-parent=".parent-fly" type="submit" name="add" title="Add To Cart">Add to cart</button>
+																		
+																	<a   id="cart" data-productid="<?= $pmenu->p_id; ?>" data-productname="<?=  $pmenu->p_name; ?>"
+								                              data-productprize="<?=  $pmenu->p_price-($pmenu->p_price * $pmenu->p_discount)/100 ?>"
+								                              data-productimg="<?=$h[0];?>" class="_btn add-to-cart" type="submit" name="add">
+															  <span><i class="cs-icon icon-cart"></i>Add to cart</span></a>
+																	
+																	<div id="cart-animation" style="display:none">1</div>
+																	
 																	</div>
+															
 																</form>
 															</div>
 															<!--inner-mask-->
@@ -153,7 +160,7 @@
 													</div>
 													<div class="product-label">
 														<div class="label-element best-label">
-														<span style="font-size:8px;"><?=$pmenu->p_name;?></span>
+														<span style="font-size:15px;"><?=$pmenu->p_tag;?></span>
 														</div>
 													</div>
 												</div>
@@ -268,7 +275,7 @@
 													</div>
 													<div class="product-label">
 														<div class="label-element new-label">
-															<span>New</span>
+															<span><?=$pmenu->p_tag;?></span>
 														</div>
 													</div>
 												</div>
@@ -277,10 +284,10 @@
 														<span class="spr-badge" data-rating="0.0"><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star-empty" style=""></i><i class="spr-icon spr-icon-star-empty" style=""></i><i class="spr-icon spr-icon-star-empty" style=""></i><i class="spr-icon spr-icon-star-empty" style=""></i><i class="spr-icon spr-icon-star-empty" style=""></i></span><span class="spr-badge-caption">No reviews</span>
 														</span>
 													</div>
-													<div class="product-title"><a class="title-5" href="product.html">Juice Ice Tea</a></div>
+													<div class="product-title"><a class="title-5" href="product.html"><?= $pmenu->p_name;?></a></div>
 													<div class="product-price">
 														<span class="price">
-															<span class="money" data-currency-usd="$20.00">$20.00</span>
+															<span class="fa fa-rupee" data-currency-usd="$20.00"><?=$pmenu->p_price;?></span>
 														</span>
 													</div>
 												</div>
@@ -310,7 +317,7 @@
 		</main>
 	</div>
 	<section class="home-product-layout">
-	<center><h1> What Client Say about our site<hr></h1></center>
+	<center><h1> What Client Say about Our Pizza Corner<hr></h1></center>
 	<marquee>
 						<div class="container">
 					
@@ -321,8 +328,6 @@
 									
 									<center>
 										<h4><?= $feed->f_name;?></h4>
-										<br>
-										<h5><?= $feed->f_email;?></h5>
 										<br>
 										<p><?= $feed->f_msg;?></p>
 									</center>
@@ -338,3 +343,62 @@
 						</div>
 	</section>
 			
+<script>
+$(document).ready(function(){
+	// disply_cart();
+	$("#cart").click(function(){
+		
+			var p_id=$(this).data("productid");
+			var p_name=$(this).data("productname");
+			var p_price=$(this).data("productprize");
+			var p_img=$(this).data("productimg");
+			
+			$.ajax({
+				url:"<?= base_url(); ?>Pizza/cart_insert",
+				method:"post",
+				data:{id:p_id,name:p_name,price:p_price,img:p_img}
+			})
+			.done(function(msg){
+				 $("#getmsg").html(msg);
+				$("#mymodel").modal('show');
+				disply_cart();
+			});
+	})	;
+	
+	
+	function disply_cart()
+	{
+			$.ajax({
+				url:"<?= base_url(); ?>Pizza/shoppingcart",
+				method:"post",
+				data:{}
+			})
+			.done(function(msg){
+				
+				 $("#cart_display").html(msg);
+				
+			});
+	
+	}
+
+});
+</script>
+<div class="modal fade" id="mymodel" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> Add cart</h4>
+        </div>
+        <div class="modal-body">
+          <p class="" id="getmsg"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

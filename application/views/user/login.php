@@ -57,7 +57,7 @@
 		$(document).ready(function(){
 			//alert("hello");
 			$("#mail_check").blur(function(){
-				$("#msg").html("<img src='<?=base_url();?>banner_img/loader.gif' height='50' width='50'>")
+				$("#msg").html("<img src='<?=base_url();?>uploads/banner_img/loader.gif' height='50' width='50'>")
 			$.ajax({
 				url:"<?=base_url();?>Pizza/mail_check1",
 				method:"post",
@@ -117,6 +117,7 @@
 									<!--submenu fetch end -->
 									</li>
 									<?php } ?>
+									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
 									</ul>
 									</div>
 										<div class="nav-icon">

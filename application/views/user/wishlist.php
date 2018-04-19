@@ -92,6 +92,7 @@
 									<!--submenu fetch end -->
 									</li>
 									<?php } ?>
+									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
 									</ul>	</div>
 										<div class="nav-icon">
 											<div class="m_search search-icon">
@@ -488,11 +489,11 @@
 								<div class="breadcrumb-group">
 									<h1 class="hidden">Wish List</h1>
 									<div class="breadcrumb clearfix">
-										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?=base_url();?>index.html" title="Fast Food" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
+										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?=base_url();?>" title="Fast Food" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
 										</span>
 										<span class="arrow-space"></span>
 										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-											<a href="<?=base_url();?>" title="Wish List" itemprop="url"><span itemprop="title">Wish List</span></a>
+											<a href="<?=base_url();?>Pizza/show_wishlist" title="Wish List" itemprop="url"><span itemprop="title">Wish List</span></a>
 										</span>
 									</div>
 								</div>
@@ -584,3 +585,44 @@
 	</div>
 	
 </body>
+<script>
+$(document).ready(function(){
+	// disply_cart();
+	$("#cart").click(function(){
+		
+			var p_id=$(this).data("productid");
+			var p_name=$(this).data("productname");
+			var p_price=$(this).data("productprize");
+			var p_img=$(this).data("productimg");
+			
+			$.ajax({
+				url:"<?= base_url(); ?>Pizza/cart_insert",
+				method:"post",
+				data:{id:p_id,name:p_name,price:p_price,img:p_img}
+			})
+			.done(function(msg){
+				 $("#getmsg").html(msg);
+				$("#mymodel").modal('show');
+				disply_cart();
+			});
+	})	;
+	
+	
+	function disply_cart()
+	{
+			$.ajax({
+				url:"<?= base_url(); ?>Pizza/shoppingcart",
+				method:"post",
+				data:{}
+			})
+			.done(function(msg){
+				
+				 $("#cart_display").html(msg);
+				
+			});
+	
+	}
+
+});
+</script>
+	

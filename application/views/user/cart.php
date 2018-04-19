@@ -94,6 +94,7 @@
 									<!--submenu fetch end -->
 									</li>
 									<?php } ?>
+									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
 									</ul>
 										</li>
 											</ul>
@@ -146,6 +147,38 @@
 																		</a>
 																	</li>
 																<?php } ?>
+																
+																</ul>
+															</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+											<div class="icon_accounts">
+												<div class="m_login-account">
+													<span class="dropdown-toggle login-icon">
+														<i title="profile" class="fa fa-user"></i>
+														<i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+														<i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+													</span>
+													<div class="m_dropdown-login dropdown-menu login-content">
+														<div class="clearfix">
+															<div class="login-register-content">
+																	<ul class="nav nav-tabs">
+																
+																	<li class="account-item-title active">
+																		<a href="<?=base_url();?>Pizza/profile" >
+																		Profile
+																		</a>
+																	</li>
+																
+																<li class="account-item-title active">
+																		<a href="<?=base_url();?>Pizza/change_password" >
+																			Change password
+																		</a>
+																	</li>
+																
 																
 																</ul>
 															</div>
@@ -487,6 +520,7 @@
 															<th>Quality</th>
 															<th>Total</th>
 															<th>Remove</th>
+															<th>update</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -514,9 +548,13 @@
                                 <td><i class="fa fa-rupee"></i><?= $item['price']*$item['qty']; ?></td>
                                 <td>
                                     <a class="fa fa-close table-shopping-remove "  data-productid="<?= $item['rowid']; ?>" href="<?php echo base_url(); ?>Pizza/cart_remove/?id=<?= $item['rowid'];?>"></a>
-                                    <button  ><i  class="fa fa-refresh table-shopping-remove " ></i></button>
+                                  
+									
                                 </td>
-                            </tr>
+								<td>
+								  <button  ><i  title="update"  class="fa fa-refresh table-shopping-remove " ></i></button>
+								</td>
+							</tr>
 								</form>
 											
 							 <?php  } ?>

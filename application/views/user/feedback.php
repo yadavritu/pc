@@ -118,7 +118,8 @@
 																	<label>Your Message:<label>
 																	<textarea rows="5" cols="75" required class="form-control" name="fmsg"></textarea>
 																</div>
-														</div>
+														    </div>
+															
 														</div>
 														<div class="col-md-10">
 														</div>

@@ -86,6 +86,11 @@ class My_model extends CI_model
 		//$r=$this->db->get($tbl);
 		return $r->result();
 	}
+		public function select_order($tbl)
+	{
+		$r=$this->db->get($tbl);
+		return $r->result();
+	}
 	
 }
 ?>

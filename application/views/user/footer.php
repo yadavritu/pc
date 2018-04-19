@@ -42,6 +42,7 @@
 								
 								<li><a href="<?=base_url();?>Pizza/show_wishlist">Wishlist</a></li>
 								<li><a href="<?=base_url();?>Pizza/contact">contact</a></li>
+								<li><a href="<?=base_url();?>Pizza/about">about us</a></li>
 							</ul>
 				
 						</div>

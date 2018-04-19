@@ -99,6 +99,7 @@ class Pizza extends CI_Controller
 			{
 				$pass=$pas->r_password;
 				$a3=$pas->r_id;
+				$a4=$pas->r_file;
 				$name=$pas->r_name;
 				
 			}
@@ -108,8 +109,9 @@ class Pizza extends CI_Controller
 			{
 				$user_data=array(
 				"Admin_ID"=>$a3,	
-				"User_name"=>$name
-			); 
+				"User_name"=>$name,
+				"user_img"=>$a4
+			);			
 			$this->session->set_userdata("clinte",$user_data);
 			
 			redirect(base_url()."Pizza/index/?em=success");
@@ -157,6 +159,10 @@ class Pizza extends CI_Controller
 	}
 	public function c_password()
 	{
+		
+		$l=$this->db->query("select * from logo where l_status='unblock'");
+		$a['logo']=$l->result();
+		
 		$q1=$this->db->query("select * from menu where m_status='unblock'");
 		$a['menu']=$q1->result();
 		$a['this1']=$this;
@@ -166,6 +172,8 @@ class Pizza extends CI_Controller
 		$c=$this->input->get('email');
 		$a['action']=base_url()."Pizza/new_password/?em=".$c;
 		$this->load->view('user/c_pass',$a);
+		$this->footer();
+		
 	}
 	/************ NEW PASSWORD  ************/
 	public function new_password()
@@ -175,6 +183,7 @@ class Pizza extends CI_Controller
 		$password=$this->encryption->encrypt($this->input->post('tpassword'));
 		$this->load->model('pizza_model');
 		$this->pizza_model->up_model('reg',$email,$password);
+		redirect(base_url()."Pizza");
 	}
 	
 	public function reg()
@@ -192,11 +201,13 @@ class Pizza extends CI_Controller
 	public function reg_insert()
 	{
 		
+		$path=$this->pizza_lib->image_upload('file');
 		$this->load->library('encryption');
 		$data=array(
 			'r_name'=>$this->input->post('tfname'),
 			'r_lname'=>$this->input->post('tlname'),
 			'r_email'=>$this->input->post('temail'),
+			'r_file'=>"<img src='".base_url()."uploads/reg_img/".$path['file_name']."' height='100' width='100'>",
 			'r_password'=>$this->encryption->encrypt($this->input->post('tpassword')),
 		);
 		//$this->load->library('pizza_lib');
@@ -554,5 +565,83 @@ class Pizza extends CI_Controller
 		$this->load->view('user/order');
 		$this->footer("");
 	}
+	public function about()
+	{
+			$this->head();
+			$a['action']=base_url("pc/action_insert");
+			$a['slider']=$this->pizza_model->select_Data('banner','b_status');
+			$this->load->view('user/about',$a);
+			$this->footer();
+	}
+	public function profile()
+	{
+		$this->head();
+		$a['action']=base_url()."Pizza/profile_in";
+		$a['user_data']=$this->session->userdata("clinte");
+		if(empty($a['user_data']))
+		 {
+			 redirect(base_url()."Pizza");
+		 }
+		 else
+		 {
+		$this->load->view("user/profile",$a);
+		$this->footer();
+		}
+	}
+	/*********************CHANGE PASSWORD NEW START********************************/
+	public function change_password()
+	{
+		$this->head();
+		$a['action']=base_url()."pizza/new_password_update";
+		$this->load->view("user/change_password",$a);
+		$this->footer();
+	}
+		
+		
+	
+		public function change_new_password()
+	{
+		$change=$this->input->post('submenu');
+		$me=$this->session->userdata("clinte");
+		$oid=$me['Admin_ID'];
+		//print_r($oid);
+		//echo	"select r_password from reg where r_id='$oid'";
+		$r=$this->db->query("select r_password from reg where r_id='$oid'");
+		$r1=$r->result();
+		foreach($r1 as $rec)
+		{
+			$p2=$rec->r_password;
+		}
+		$this->load->library('encryption');
+		$p3=$this->encryption->decrypt($p2);
+		if($p3!=$change)
+		{
+			echo "Password Is Not Match";
+		}
+		else
+		  
+		  {
+		echo '<div class="form-group">
+								<label >New Paasword:</label>
+								<input type="text" name="new_change" placeholder="NEW PASSWORD" class="form-control">
+								</div>';
+		}
+	}
+		
+	public function new_password_update()
+	 {
+		 $me=$this->session->userdata("clinte");
+		 $oid=$me['Admin_ID'];
+		 $p2=$this->input->post('new_change');
+		 $this->load->library("encryption");
+		 $p2=$this->encryption->encrypt($p2);
+		
+		 $this->load->model('pizza_model');
+		 $this->pizza_model->update_password_change($p2,$oid);
+		 redirect(base_url()."pizza/login");
+	
+	} 
+	
+	
 }
 ?>

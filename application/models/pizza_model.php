@@ -53,5 +53,10 @@ class pizza_model extends CI_model
         $insert = $this->db->insert('payments',$data);
         return $insert?true:false;
     }
+	public function update_password_change($p2,$id)
+	{
+		$this->load->database();
+		$this->db->query("update reg set r_password='$p2' where r_id='$id'");
+	}
 }
 ?>

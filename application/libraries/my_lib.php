@@ -84,7 +84,7 @@ class My_lib
 	public function image_upload($img_name)
 	{
 		$ci=& get_instance();
-		$fi['upload_path']="banner_img/";
+		$fi['upload_path']="uploads/banner_img/";
 		$fi['allowed_types']="jpeg|bmp|png|gif|jpg|";
 		$fi['max_size']=7000;
 		$fi['encrypt_name']=TRUE;
@@ -102,7 +102,7 @@ class My_lib
 		public function gallery_upload($img_name)
 	{
 		$ci=& get_instance();
-		$fi['upload_path']="gallery_image/";
+		$fi['upload_path']="uploads/gallery_image/";
 		$fi['allowed_types']="jpeg|bmp|png|gif|jpg|";
 		$fi['max_size']=7000;
 		$fi['encrypt_name']=TRUE;
@@ -160,7 +160,15 @@ class My_lib
 			show_error($ci->email->print_debugger());
 		}
 	}
-	
+	public function show_order($tbl,$data,$id)
+	{
+		$ci=& get_instance();
+		$ci->load->model('my_model');
+		$r['records']=$ci->my_model->select_order($tbl);
+		$r['lib_col']=$data;
+		$ci->load->view('order_show',$r);
+		
+	}
 	
 }
 	

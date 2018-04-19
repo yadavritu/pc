@@ -19,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Bitter:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	
 	<link href="<?= base_url(); ?>assets_client/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">  
-	<link href="../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+	<link href="<?= base_url(); ?>assets_client/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/stylesheets/fonts.googleapis.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/stylesheets/icon-font.min.css" rel="stylesheet" type="text/css" media="all">
@@ -100,6 +100,7 @@
 									<!--submenu fetch end -->
 									</li>
 									<?php } ?>
+									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
 									</ul>
 									</div>
 										<div class="nav-icon">
@@ -489,7 +490,7 @@
 									<div id="register" class="customers">
 									<!--register form uge for -->
 										<h2>Register</h2>
-										<form method="post" action="<?= $action;?>" id="form_values" accept-charset="UTF-8">
+										<form method="post" action="<?= $action;?>" enctype="multipart/form-data" id="form_values" accept-charset="UTF-8">
 											<div class="clearfix large_form form-item">
 												<input type="text" value="" placeholder="First Name"  name="tfname" class="text" size="30">
 											</div>
@@ -498,6 +499,9 @@
 											</div>
 											<div class="clearfix large_form form-item">
 												<input type="email" value="" placeholder="Email" name="temail" class="text" size="30">
+											</div>
+											<div class="clearfix large_form form-item">
+												<input type="file" value="" placeholder="" name="file" class="file" size="30">
 											</div>
 											<div class="clearfix large_form form-password form-item">
 												<input type="password" value="" placeholder="Password" name="tpassword" class="password text" size="30">

@@ -297,7 +297,7 @@ class My_pizza extends CI_Controller
 		
 		$insert_array=array(
 		'm_name'=>$this->input->post('menu'),
-		'm_file'=>"<img src='".base_url()."banner_img/".$path['file_name']."' height='100' width='100'>"
+		'm_file'=>"<img src='".base_url()."uploads/banner_img/".$path['file_name']."' height='100' width='100'>"
 		);
 		$r=$this->my_model->insert_Data('menu',$insert_array);
 		if($r=='1'){
@@ -530,7 +530,7 @@ class My_pizza extends CI_Controller
 		$path=$this->my_lib->image_upload('banner');
 		
 			$insert_array=array(
-			'banner_image'=>"<img src='".base_url()."banner_img/".$path['file_name']."' height='100' width='100'>"
+			'banner_image'=>"<img src='".base_url()."uploads/banner_img/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->insert_Data('banner',$insert_array);
@@ -567,7 +567,7 @@ class My_pizza extends CI_Controller
 		unlink(str_ireplace(base_url(),"",$array[0]));
 		$path=$this->my_lib->image_upload('banner');
 		$insert_array=array(
-			'banner_image'=>"<img src='".base_url()."banner_img/".$path['file_name']."' height='100' width='100'>"
+			'banner_image'=>"<img src='".base_url()."uploads/banner_img/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->update_record($tbl,$insert_array,$col,$val);
@@ -622,7 +622,7 @@ class My_pizza extends CI_Controller
 		$path=$this->my_lib->image_upload('logo');
 		
 			$insert_array=array(
-			'logo_image'=>"<img src='".base_url()."banner_img/".$path['file_name']."' height='100' width='100'>"
+			'logo_image'=>"<img src='".base_url()."uploads/banner_img/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->insert_Data('logo',$insert_array);
@@ -658,7 +658,7 @@ class My_pizza extends CI_Controller
 		unlink(str_ireplace(base_url(),"",$array[0]));
 		$path=$this->my_lib->image_upload('logo');
 		$insert_array=array(
-			'logo_image'=>"<img src='".base_url()."banner_img/".$path['file_name']."' height='100' width='100'>"
+			'logo_image'=>"<img src='".base_url()."uploads/banner_img/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->update_record($tbl,$insert_array,$col,$val);
@@ -1158,7 +1158,7 @@ public function product2()
 			$name=$_FILES['f1']['name'][$key];
 			$tmp=$_FILES['f1']['tmp_name'][$key];
 			$path='pro_img/'.$name;
-			 $path1[].="<img src='".base_url()."pro_img/".$name."' height='50' width='50'>";
+			 $path1[].="<img src='".base_url()."uploads/pro_img/".$name."' height='50' width='50'>";
 			move_uploaded_file($tmp,$path);
 		}
 		$img1=implode(",",$path1);
@@ -1427,7 +1427,7 @@ public function product2()
 		$path=$this->my_lib->gallery_upload('gallery');
 		
 			$insert_array=array(
-			'gallery_image'=>"<img src='".base_url()."gallery_image/".$path['file_name']."' height='100' width='100'>"
+			'gallery_image'=>"<img src='".base_url()."uploads/gallery_image/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->insert_Data('gallery',$insert_array);
@@ -1464,7 +1464,7 @@ public function product2()
 		unlink(str_ireplace(base_url(),"",$array[0]));
 		$path=$this->my_lib->gallery_upload('gallery');
 		$insert_array=array(
-			'gallery_image'=>"<img src='".base_url()."gallery_image/".$path['file_name']."' height='100' width='100'>"
+			'gallery_image'=>"<img src='".base_url()."uploads/gallery_image/".$path['file_name']."' height='100' width='100'>"
 			);
 
 		$r=$this->my_model->update_record($tbl,$insert_array,$col,$val);
@@ -1585,7 +1585,7 @@ public function product2()
 		$this->sidebar("");
 		$a['action']=base_url()."My_pizza/order_add";
 		$a["heading1"]="Manage Order Insert";
-		$a['link']="My_pizza/display_order/order_table/o_id/o_status";
+		$a['link']="My_pizza/display_order/order_table/o_id/";
 		$this->load->view("order",$a);	
 		
 	}
@@ -1611,24 +1611,36 @@ public function product2()
 			redirect(base_url()."My_pizza/order/?oder=notdone");
 		}
 	}
-	public function display_order($tbl,$id,$status)
+	public function display_order($tbl,$id)
 	{
 		$this->sidebar("");
 		// ************ Add action here********************//
 		$data=array(	
 		'ID'=>"o_id",
-		'Order Name'=>"o_name",	
+		'User Name'=>"o_name",	
 		'Order Address'=>"o_address",	
 		'Order Quntity'=>"o_qty",	
 		'Order Amuont'=>"o_amount",	
 		'Order Time'=>"o_time",	
 				);	
-		$redirect=base_url()."My_pizza/display_order/$tbl/$id/$status";
+		$redirect=base_url()."My_pizza/display_order/$tbl/$id";
 		$edit="My_pizza/order/";
 		$heading="Display data of order";
-		$this->my_lib->show_lib($tbl,$data,$id,$status,$redirect,$edit,$heading);
+		$this->my_lib->show_order($tbl,$data,$id);
 		//************ action close here******************//
 	}
+	public function user_data()
+	{
+		$this->head("");
+		$this->sidebar("");
+		$a['action']=base_url()."My_pizza/insert_order";
+	
+			$this->load->view("user_data",$a);
+		
+		
+	
+	}
+	
 	
 	  
 }

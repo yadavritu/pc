@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-
-<!-- Mirrored from demo.designshopify.com/html_fastfood/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2018 11:41:47 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <body class="fastfood_1" >
 
@@ -125,21 +119,21 @@
 															<h2 class="title">Write us a message</h2>
 														</div>
 														<div class="form_content">
-															<form method="post" action="http://demo.designshopify.com/html_fastfood/contact.html" id="contact_form" class="contact-form" accept-charset="UTF-8">
+															<form method="post" action="" id="contact_form" class="contact-form" accept-charset="UTF-8">
 																<div id="contactFormWrapper" class="group_form">
-																	<div class="col-md-6">
+																	<div class="col-md-12">
 																		<div class="form-item">
 																			<input type="text" id="contactFormName" name="contact[name]" placeholder="Username">
 																		</div>
 																	</div>
-																	<div class="col-md-6">
+																	<div class="col-md-12">
 																		<div class="form-item">
 																			<input type="email" id="contactFormEmail" name="contact[email]" placeholder="Email">
 																		</div>
 																	</div>
 																	<div class="col-md-12">
 																		<div class="form-item">
-																			<textarea rows="15" cols="75" id="contactFormMessage" name="contact[body]" placeholder="Your message"></textarea>
+																			<textarea id="contactFormMessage" name="contact[body]" placeholder="Your message"></textarea>
 																		</div>
 																	</div>
 																	<div class="col-md-12">
