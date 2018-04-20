@@ -16,6 +16,13 @@ class Order extends CI_Controller{
 			$order['per_km_cost'] = $storeAddress['per_km_cost'];
 			$this->session->set_userdata(array('order'=>$order));
 		}
+		//Check Login
+		if($this->session->userdata('clinte') =='')
+		{
+			redirect(base_url()."Pizza/login");
+			exit;
+		}
+		
 		$data['order']=$this->session->userdata('order');
 		$data['sess']=$this->session->userdata('clinte');
 		$data['this1']=$this;
@@ -32,9 +39,9 @@ class Order extends CI_Controller{
 			 redirect(base_url()."Pizza/login/?login=true");
 		}elseif($this->cart->total_items() > 0){
 			//Set variables for paypal form
-			$returnURL = base_url().'Pizza/success'; //payment success url
-			$cancelURL = base_url().'Pizza/cancel'; //payment cancel url
-			$notifyURL = base_url().'Pizza/ipn'; //ipn url
+			$returnURL = base_url().'order/success'; //payment success url
+			$cancelURL = base_url().'order/cancel'; //payment cancel url
+			$notifyURL = base_url().'order/ipn'; //ipn url
 			//get particular product data
 			$userID = $val; //current user id
 			$logo = base_url().'assets/images/codexworld-logo.png';
