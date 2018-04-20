@@ -11,7 +11,7 @@
 	<meta name="theme-color" content="#7796A8">
 	<meta name="description" content="" />
 	<title>
-	Order History - Fast Food
+	Order History - Pizza Corner
 	</title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -67,7 +67,7 @@
 								<div class="breadcrumb-group">
 									<h1 class="hidden">Order History</h1>
 									<div class="breadcrumb clearfix">
-										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="index.html" title="Fast Food" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
+										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="index.html" title="Pizza Corner" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
 										</span>
 										<span class="arrow-space"></span>
 										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">

@@ -10496,7 +10496,7 @@ body:not(.index-template) main section.list-collection-content .products>div:nth
 }
 
 body:not(.index-template) main section.collection-layout {
-    margin-top: 50px;
+    margin-top: 5px;
     margin-bottom: 50px
 }
 

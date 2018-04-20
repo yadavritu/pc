@@ -74,16 +74,12 @@ class Pizza extends CI_Controller
 	}
 	
 	public function login()
-	{	
-		
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$r1['logo']=$l->result();
-		$r=$this->db->query("select * from menu where m_status='unblock'");
-		$r1['menu']=$r->result();
-		$r1['this1']=$this;
-		$r1['action']=base_url()."Pizza/login_insert";
-		$r1['action1']=base_url()."Pizza/f_pass";
-		$this->load->view('user/login',$r1);
+	{			
+		$data['this1']=$this;
+		$data['action']=base_url()."Pizza/login_insert";
+		$data['action1']=base_url()."Pizza/f_pass";
+		$this->head();
+		$this->load->view('user/login',$data);
 		$this->footer();
 	}
 	
@@ -159,19 +155,12 @@ class Pizza extends CI_Controller
 		redirect(base_url()."Pizza");
 	}
 	public function c_password()
-	{
-		
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$a['logo']=$l->result();
-		
-		$q1=$this->db->query("select * from menu where m_status='unblock'");
-		$a['menu']=$q1->result();
-		$a['this1']=$this;
-		
-		$a['menu']=$this->pizza_model->select_Data('menu','m_status');
+	{		
 		$a['this1']=$this;
 		$c=$this->input->get('email');
 		$a['action']=base_url()."Pizza/new_password/?em=".$c;
+		
+		$this->head();
 		$this->load->view('user/c_pass',$a);
 		$this->footer();
 		
@@ -190,18 +179,14 @@ class Pizza extends CI_Controller
 	public function reg()
 	{
 		$a1['validation']='reg.js';
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$a1['logo']=$l->result();
-		$a=$this->db->query("select * from menu where m_status='unblock'");
-		$a1['menu']=$a->result();
 		$a1['this1']=$this;
 		$a1['action']=base_url()."Pizza/reg_insert";
+		$this->head();
 		$this->load->view('user/reg',$a1);
 		$this->footer();
 	}
 	public function reg_insert()
-	{
-		
+	{		
 		$path=$this->pizza_lib->image_upload('file');
 		$this->load->library('encryption');
 		$data=array(
@@ -215,31 +200,17 @@ class Pizza extends CI_Controller
 		//$this->pizza_lib->sendMail($this->input->post('temail'));
 		$this->load->model('pizza_model');
 		$r=$this->pizza_model->reg_insert('reg',$data);
-		if($r==1)
-		{
+		if($r==1){
 			redirect(base_url()."Pizza/reg/?em=success");
-			//echo "<h1>registration success</h1>";
-		}
-		else
-		{
-				redirect(base_url()."Pizza/reg/?em=unsuccess");
-			//echo "<h1>registration unsuccess</h1>";
+		}else{
+			redirect(base_url()."Pizza/reg/?em=unsuccess");
 		}	
 	} 
 	public function collection()
 	{	
 		$id=$this->input->get('c');
 		$ct=$this->db->query("select * from product where p_status='unblock' and m_id='$id' ");
-		$a1['pizza_data']=$ct->result();
-		
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$a1['logo']=$l->result();
-		
-		$a1['sess']=$this->session->userdata('clinte');	
-		
-		$a=$this->db->query("select * from menu where m_status='unblock'");
-		$a1['menu']=$a->result();
-		
+		$a1['pizza_data']=$ct->result();				
 		$p=$this->db->query("select * from pizza_types where pizza_status='unblock'");
 		$a1['pizza']=$p->result();
 		
@@ -249,6 +220,7 @@ class Pizza extends CI_Controller
 		
 		$a1['this1']=$this;
 		$a1['action']=base_url()."Pizza/collection_insert";
+		$this->head();
 		$this->load->view('user/collection',$a1);
 		$this->footer();
 		
@@ -258,14 +230,7 @@ class Pizza extends CI_Controller
 		$id=$this->input->get('c');
 		$ct=$this->db->query("select * from product where p_status='unblock' and s_id='$id' ");
 		$a1['pizza_data']=$ct->result();
-		
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$a1['logo']=$l->result();
-		
-	
-		$a=$this->db->query("select * from menu where m_status='unblock'");
-		$a1['menu']=$a->result();
-		
+				
 		$p=$this->db->query("select * from pizza_types where pizza_status='unblock'");
 		$a1['pizza']=$p->result();
 		
@@ -276,6 +241,7 @@ class Pizza extends CI_Controller
 		
 		$a1['this1']=$this;
 		$a1['action']=base_url()."Pizza/collection_insert";
+		$this->head();
 		$this->load->view('user/collection',$a1);
 		$this->footer();
 	}
@@ -318,16 +284,11 @@ class Pizza extends CI_Controller
 	}
 	public function product_info()
 	{	
-	
-		
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$a['logo']=$l->result();
-		$a1=$this->db->query("select * from menu where m_status='unblock'");
-		$a['menu']=$a1->result();
 		$a['this1']=$this;
 		$id=$this->input->get('pid');
 		$q1=$this->db->query("select * from product where  p_status='unblock' and `p_id`='$id'");
 		$a['cart_data']=$q1->result();
+		$this->head();
 		$this->load->view('user/product_info',$a);
 		$this->store_cookies($a['cart_data']);
 		$this->footer();
@@ -379,6 +340,7 @@ class Pizza extends CI_Controller
 		$data['menu']=$r->result();
 		$data['this1']=$this;
 		$data['order']=$this->session->userdata('order');
+		$this->head();
 		$this->load->view('user/cart',$data);
 		$this->footer(); 
 	}
@@ -427,13 +389,8 @@ class Pizza extends CI_Controller
 	}
 	public function compare_show()
 	{
-			
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$data['logo']=$l->result();
-	
-		$m=$this->db->query("select * from menu where m_status='unblock'");
-		$data['menu']=$m->result();
 		$data['this1']=$this;
+		$this->head();
 		$this->load->view("user/compare",$data);
 		$this->footer();
 	}
@@ -479,21 +436,15 @@ class Pizza extends CI_Controller
 }
 	public function show_wishlist()
 	{
-		$l=$this->db->query("select * from logo where l_status='unblock'");
-		$md['logo']=$l->result();
-		
-		$m=$this->db->query("select * from menu where m_status='unblock'");
-		$md['menu']=$m->result();
-		$md['this1']=$this;
-		
-		$md['sess']=$this->session->userdata('clinte');	
-		
+		$md['this1']=$this;		
+		$md['sess']=$this->session->userdata('clinte');			
 		$d=$this->session->userdata('clinte');
 		$usr_id=$d['Admin_ID'];
 		$r=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id='$usr_id'");
-		$md['data']=$r->result();	
+		$md['data']=$r->result();
 		$md['wish_total']=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id='$usr_id'")->num_rows();
 		
+		$this->head();
 		$this->load->view('user/wishlist',$md);
 		$this->footer();
 	}

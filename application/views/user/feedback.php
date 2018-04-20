@@ -24,11 +24,11 @@
 								<div class="breadcrumb-group">
 									<h1 class="hidden">FAQs</h1>
 									<div class="breadcrumb clearfix">
-										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="index.html" title="Fast Food" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
+										<span><a href="/" title="Pizza Corner" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a>
 										</span>
 										<span class="arrow-space"></span>
-										<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-											<a href="faqs.html" title="FAQs" itemprop="url"><span itemprop="title">FAQs</span></a>
+										<span>
+											<a href="/" title="FAQs" itemprop="url"><span itemprop="title">FAQs</span></a>
 										</span>
 									</div>
 								</div>

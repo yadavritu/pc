@@ -53,9 +53,9 @@
 <script type="text/javascript">
     (function () {
         var options = {
-            whatsapp: "+918780655246", // WhatsApp number
+            whatsapp: "+919429094290", // WhatsApp number
             company_logo_url: "//scontent.fstv1-1.fna.fbcdn.net/v/t1.0-9/23905219_1495054820530470_3469001348467362670_n.png?_nc_cat=0&oh=b852452a768ab1e8dc0fcbe5abb218ce&oe=5B60FC27", // URL of company logo (png, jpg, gif)
-            greeting_message: "Hello,Welcomes To mY pizza COrner how may we help you? Just send us a message now to get assistance.", // Text of greeting message
+            greeting_message: "Hello,Welcomes To My Pizza Corner how may we help you? Just send us a message now to get assistance.", // Text of greeting message
             call_to_action: "Message us", // Call to action
             position: "right", // Position may be 'right' or 'left'
         };
@@ -155,6 +155,12 @@
 																	</li>																
 																	<li class="account-item-title active">
 																		<?php echo anchor('Pizza/change_password', 'Change Password') ?>
+																	</li>
+																	<li class="account-item-title active">
+																		<?php echo anchor('Order/history', 'My Orders') ?>
+																	</li>
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/show_wishlist', 'My Wishlist') ?>
 																	</li>
 																	<li class="account-item-title active">
 																		<?php echo anchor('Pizza/logout_session', 'Logout') ?>

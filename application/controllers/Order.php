@@ -160,5 +160,28 @@ class Order extends CI_Controller{
 		
 		$this->load->view("user/footer",$a);
 	}
+	public function history(){
+		$session = $this->session->userdata('clinte');
+		$order=$this->db->query("select * from orders where user_id= ".$session['Admin_ID']." AND payment_status='Paid' ORDER BY created DESC");
+		$data['orders'] = $order->result();
+		$this->head(); 
+		$this->load->view('order/history',$data);
+		$this->footer(); 		
+	}
+	public function detail(){
+		$session = $this->session->userdata('clinte');
+		$orderId = $this->input->get('order_id');
+		
+		$order = $this->db->query("select * from orders where user_id= ".$session['Admin_ID']." AND payment_status='Paid' AND id=".$orderId);
+		$data['order'] = $order->result();
+		if(empty($data['order'])){
+			redirect(base_url()."Order/history");	
+		}
+		$orderDetail = $this->db->query("select * from order_details where order_id= ".$orderId);
+		$data['orderDetail'] = $orderDetail->result();
+		$this->head(); 
+		$this->load->view('order/detail',$data);
+		$this->footer(); 		
+	}
 }
 ?>
