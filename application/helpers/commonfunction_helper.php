@@ -98,6 +98,7 @@ function getShippingCharge($distance,$charge,$free){
 			'charge' => 0,
 		);;
 }
+
 function getUserId(){
 	$CI = & get_instance();
 	//$md['sess']=$CI->session->userdata('clinte');			
