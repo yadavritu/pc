@@ -46,16 +46,13 @@ class Pizza extends CI_Controller
 	}
 	public function dash()
 	{
-		//$this->head();
 		$f=$this->db->query("select * from feedback where f_status='unblock'");
 		$r['feedata']=$f->result();
 		$s=$this->db->query("select * from menu where m_status='unblock'");
 		$r['menu']=$s->result();
 		
 		$g=$this->db->query("select * from gallery where g_status='unblock'");
-		$r['gallery']=$g->result();
-		
-		
+		$r['gallery']=$g->result();	
 		
 		$r['slider']=$this->pizza_model->select_Data('banner','b_status');		
 		$this->load->view("user/dash",$r);
@@ -111,23 +108,25 @@ class Pizza extends CI_Controller
 			);			
 			$this->session->set_userdata("clinte",$user_data);
 			
-			redirect(base_url()."Pizza/index/?em=success");
+			$this->session->set_flashdata('success', 'Logged In Successfully.');
+			redirect(base_url()."Pizza/index");
 			}
 			else
 			{
-					//echo "password not match";
-					redirect(base_url()."Pizza/login/?em=unsuccess");
+				$this->session->set_flashdata('error', 'Invalid Email Address/Password.');
+				redirect(base_url()."Pizza/login/");
 			}	
 		}		 
 		else
 		{
-			//echo "email not match";
-					redirect(base_url()."Pizza/login/?em=invlid_email");
+			$this->session->set_flashdata('error', 'Invalid Email Address/Password.');
+			redirect(base_url()."Pizza/login");
 		}
 	}
 	public function logout_session()
 	{
 		 $this->session->unset_userdata('clinte');
+		 $this->session->set_flashdata('success', 'Logged Out Successfully .');
 		 redirect(base_url()."Pizza");
 	}
 	
@@ -185,27 +184,60 @@ class Pizza extends CI_Controller
 		$this->load->view('user/reg',$a1);
 		$this->footer();
 	}
-	public function reg_insert()
+	public function register()
 	{		
-		$path=$this->pizza_lib->image_upload('file');
-		$this->load->library('encryption');
-		$data=array(
-			'r_name'=>$this->input->post('tfname'),
-			'r_lname'=>$this->input->post('tlname'),
-			'r_email'=>$this->input->post('temail'),
-			'r_file'=>"<img src='".base_url()."uploads/reg_img/".$path['file_name']."' height='100' width='100'>",
-			'r_password'=>$this->encryption->encrypt($this->input->post('tpassword')),
-		);
-		//$this->load->library('pizza_lib');
-		//$this->pizza_lib->sendMail($this->input->post('temail'));
-		$this->load->model('pizza_model');
-		$r=$this->pizza_model->reg_insert('reg',$data);
-		if($r==1){
-			redirect(base_url()."Pizza/reg/?em=success");
-		}else{
-			redirect(base_url()."Pizza/reg/?em=unsuccess");
-		}	
+		$data = array();
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$this->load->helper(array('form', 'url','file'));
+			$this->load->library('form_validation');
+			//Set Rule
+			$this->form_validation->set_rules('r_name', 'First Name', 'trim|required');
+			$this->form_validation->set_rules('r_lname', 'Last Name', 'trim|required');
+			$this->form_validation->set_rules('r_email', 'Email', 'trim|required|valid_email|is_unique[reg.r_email]');
+			$this->form_validation->set_rules('mobile_no', 'Mobile Number', 'trim|required|exact_length[10]');
+			$this->form_validation->set_rules('r_password', 'Password', 'trim|required|min_length[6]');
+			$this->form_validation->set_rules('r_file', '', 'callback_file_check');
+			if ($this->form_validation->run() == TRUE){
+				$path=$this->pizza_lib->image_upload('r_file');
+				$this->load->library('encryption');
+				$data=array(
+					'r_name'=>$this->input->post('r_name'),
+					'r_lname'=>$this->input->post('r_lname'),
+					'r_email'=>$this->input->post('r_email'),
+					'mobile_no'=>$this->input->post('mobile_no'),
+					'r_password'=>$this->encryption->encrypt($this->input->post('r_password')),
+					'r_file'=>"uploads/reg_img/".$path['file_name'],
+				);
+				//$this->load->library('pizza_lib');
+				//$this->pizza_lib->sendMail($this->input->post('r_email'));
+				$this->load->model('pizza_model');
+				$r=$this->pizza_model->reg_insert('reg',$data);
+				if($r==1){
+					redirect(base_url()."Pizza/register");
+					$this->session->set_flashdata('success', 'Your account has been created successfully. Please login now.');
+				}else{
+					redirect(base_url()."Pizza/register");
+					$this->session->set_flashdata('error', 'Your account has been created successfully. Please login now.');
+				}
+			}
+		}
+		$this->head();
+		$this->load->view('user/register',$data);
+		$this->footer();
 	} 
+	public function file_check($str){
+		if(empty($_FILES['r_file']['name'])){
+			return true;
+		}
+        $allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+        $mime = get_mime_by_extension($_FILES['r_file']['name']);
+		if(in_array($mime, $allowed_mime_type_arr)){
+			return true;
+		}else{
+			$this->form_validation->set_message('file_check', 'Please select only jpg/png/gif file.');
+			return false;
+		}
+	}
 	public function collection()
 	{	
 		$isMain = $this->input->get('main','s_id');
@@ -250,13 +282,13 @@ class Pizza extends CI_Controller
 		$r=$this->pizza_model->reg_insert('feedback',$data);
 		if($r==1)
 		{
-			redirect(base_url()."Pizza/feedback/?em=success");
-			//echo "<h1>registration success</h1>";
+			$this->session->set_flashdata('success', 'Thank you, We received your request, We will reply back to you ASAP.');
+			redirect(base_url()."Pizza/feedback");
 		}
 		else
 		{
-				redirect(base_url()."Pizza/feedback/?em=unsuccess");
-			//echo "<h1>registration unsuccess</h1>";
+			$this->session->set_flashdata('error', 'Unable to process your request, Please try again.');
+			redirect(base_url()."Pizza/feedback");
 		}	
 	} 
 	public function product($a)
@@ -267,13 +299,17 @@ class Pizza extends CI_Controller
 	}
 	public function product_info()
 	{	
-		$a['this1']=$this;
 		$id=$this->input->get('pid');
+		$data['this1']=$this;
+		$data['productId']=$id;
 		$q1=$this->db->query("select * from product where  p_status='unblock' and `p_id`='$id'");
-		$a['cart_data']=$q1->result();
+		$data['cart_data']=$q1->result();
+		//GET REVIEW
+		$review = $this->db->query("select * from reviews where `product_id`='$id'");
+		$data['reviews'] = $review->result();
 		$this->head();
-		$this->load->view('user/product_info',$a);
-		$this->store_cookies($a['cart_data']);
+		$this->load->view('user/product_info',$data);
+		$this->store_cookies($data['cart_data']);
 		$this->footer();
 	}
 	
@@ -294,25 +330,23 @@ class Pizza extends CI_Controller
 		echo " Your Item Added Into cart";
 	 }
 	public function cart_remove()
-	{
-		
-			$data = array(
+	{		
+		$data = array(
 			'rowid'  =>$this->input->get('id') ,
 			'qty'    =>0
-			);
-			$this->cart->update($data);
-			
+		);
+		$this->cart->update($data);
+		$this->session->set_flashdata('success', 'Product removed from your Cart.');			
 		redirect(base_url()."Pizza/show_cart");
 	}
 	public function update_cart()
-	{
-		
-			$data = array(
+	{		
+		$data = array(
 			'rowid'  =>$this->input->get('qty1') ,
 			'qty'    =>$this->input->get('qty')
-			);
-			$this->cart->update($data);
-			
+		);
+		$this->cart->update($data);
+		$this->session->set_flashdata('success', 'Cart updated Successfully.');
 		redirect(base_url()."Pizza/show_cart");
 	}
 	public function show_Cart(){
@@ -392,31 +426,25 @@ class Pizza extends CI_Controller
 	}
 	public function wishlist()
 	{
-		
+		$arrResponse = array('status'=>"error","message"=>"Unable to add product in wishlist, Please try again.");
 		$pro=$this->input->post('p_id');
 		$insert_wishlist=array
 		(
 			'w_prod_id'=>$this->input->post('p_id'),
 			'w_user_id'=>$this->input->post('u_id')
 		);
-		$r=$this->db->query("select * from wishlist where w_prod_id='$pro'" );
-		if($r->num_rows()>0)
-		{
-			//echo "else";
-			echo "already in wish list";
-		}
-		else
-		{  
-			//echo 
+		$r=$this->db->query("select * from wishlist where w_prod_id='$pro' and w_user_id=".getUserId() );
+		if($r->num_rows()>0){
+			$arrResponse = array('status'=>"info","message"=>"Product is already available in your Wishlist.");
+		}else{  
 			$r=$this->db->insert('wishlist',$insert_wishlist);
-			if($r==1)
-			{
-			echo "Add in Your wishlist";
+			if($r==1){
+				$arrResponse = array('status'=>"success","message"=>"Product is added to your Wishlist.");
 			}
-			
-			
 		} 
-}
+		echo json_encode($arrResponse);
+		exit;
+	}
 	public function show_wishlist()
 	{
 		$data['this1']=$this;
@@ -432,6 +460,7 @@ class Pizza extends CI_Controller
 	{
 		$sql = "DELETE FROM wishlist WHERE w_id = ".$this->input->get('id');			
 		$this->db->query($sql);
+		$this->session->set_flashdata('success', 'Product removed from your wishlist.');
 		redirect(base_url()."Pizza/show_wishlist");
 	}
 	
@@ -523,6 +552,16 @@ class Pizza extends CI_Controller
 		 $this->pizza_model->update_password_change($p2,$oid);
 		 redirect(base_url()."pizza/login");
 	
+	}
+	function add_review(){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$review = $this->input->post('review');
+			$review['user_id'] = getUserId();
+			$review['created'] = date("Y-m-d H:i:s");
+			$this->db->insert('reviews',$review);
+			$this->session->set_flashdata('success', 'Thank you for submitting your review.');
+			redirect(base_url()."Pizza/product_info/?pid=".$review['product_id']);
+		}	
 	}
 }
 ?>

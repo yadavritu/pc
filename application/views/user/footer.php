@@ -99,20 +99,17 @@ function wishlist(proid)
 {
 	
 	var user="<?php if($sess['Admin_ID']){echo $sess['Admin_ID'];}else{ echo "null";}?>";
-	if(user=="null")
-	{
-		alert("login first");
-	}
-	else
-	{
-		 // alert("ok");	
+	if(user=="null"){
+		$.notify("Please login to add product in Wishlist", "error");
+	}else{
 		$.ajax({
 			url:"<?= base_url();?>Pizza/wishlist",
 			type:"post",
+			dataType:"json",	
 			data:{p_id:proid,u_id:<?php  if($sess['Admin_ID']){echo $sess['Admin_ID'];}else{ echo "null";}?>}
 		})
-		.done(function(message){
-			alert(message);
+		.done(function(response){
+			$.notify(response.message, response.status);
 		});
 	}
 		

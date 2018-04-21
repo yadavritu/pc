@@ -131,3 +131,20 @@ ALTER TABLE `order_details`
 
 ALTER TABLE `reg` ADD `mobile_no` VARCHAR(15) NOT NULL AFTER `r_lname`;
 ALTER TABLE `orders` ADD `note` TEXT NOT NULL AFTER `transaction_id`;
+
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;

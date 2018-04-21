@@ -13,7 +13,7 @@
 									</span>
 									<span class="arrow-space"></span>
 									<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-										<a href="" title="Collections" itemprop="url"><span itemprop="title">Collections</span></a>
+										<a href="" title="Collections" itemprop="url"><span itemprop="title">Products</span></a>
 									</span>
 								</div>
 							</div>
@@ -33,10 +33,10 @@
 								<div id="collection">
 									<div class="clearfix">
 										<div class="collection-toolbar _mobile col-sm-9">
-											<a href="" class="collection-banner-top">
+											<a href="" class="collection-banner-top  hidden">
 												<img src="<?= base_url(); ?>assets_client/images/collections_banner_top.jpg" alt="image product" title="">
 											</a>
-											<div class="group_toolbar">
+											<div class="group_toolbar hidden">
 												<div class="group-left">
 													<div class="filter-mobile">
 														<a href="javascript:void(0)" class="filter-icon"> 
@@ -130,8 +130,8 @@
 											</div>
 										</div>
 										<div class="collection-mainarea  col-sm-9 clearfix">
-											<div class="collection-toolbar _desktop">
-												<a href="" class="collection-banner-top">
+											<div class="collection-toolbar _desktop" style="margin-top: -65px;position: absolute;right: 0;z-index: 9;">
+												<a href="" class="collection-banner-top  hidden">
 													<img src="<?= base_url(); ?>assets_client/images/collections_banner_top.jpg" alt="image product" title="">
 												</a>
 												<div class="group_toolbar">

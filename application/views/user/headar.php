@@ -46,6 +46,7 @@
 	<script type="text/javascript" src="<?= base_url(); ?>assets_client/javascripts/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?= base_url(); ?>assets_client/javascripts/jquery.touchSwipe.min.js"></script>
 	<script type="text/javascript" src="<?= base_url(); ?>assets_client/javascripts/jquery.fancybox.js"></script>
+	<script type="text/javascript" src="<?= base_url(); ?>assets_client/javascripts/notify.js"></script>
 	<link rel="icon" type="stylesheet" href="<?=base_url();?>assets_client/images/c.jpg">
 
 	
@@ -150,7 +151,7 @@
 																		<?php echo anchor('Pizza/login', 'Login') ?>
 																	</li>
 																	<li class="account-item-title active">
-																		<?php echo anchor('Pizza/reg', 'Register') ?>
+																		<?php echo anchor('Pizza/register', 'Register') ?>
 																	</li>
 																<?php } else { ?>
 																	<li class="account-item-title active">
@@ -462,8 +463,14 @@
 					var scrollTop = $(this).scrollTop();
 					addaffix(scrollTop);
 				});
+				jQuery(document).ready(function($) {
+				<?php
+					echo '$.notify("'.$this->session->flashdata('success').'", "success");';
+					echo '$.notify("'.$this->session->flashdata('error').'", "error");';
+					echo '$.notify("'.$this->session->flashdata('info').'", "info");';
+				?>
+				});
 			</script>
 		</div>
 	</header>
 	<div class="fix-sticky"></div>
-	

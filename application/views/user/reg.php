@@ -9,7 +9,7 @@
 							<div class="customers-content">
 								<div id="register" class="customers">
 								<!--register form uge for -->
-									<h2>Register</h2>
+									<h2>Register with Pizza Corner</h2>
 									<form method="post" action="<?= $action;?>" enctype="multipart/form-data" id="form_values" accept-charset="UTF-8">
 										<div class="clearfix large_form form-item">
 											<input type="text" value="" placeholder="First Name"  name="tfname" class="text" size="30">
@@ -20,12 +20,15 @@
 										<div class="clearfix large_form form-item">
 											<input type="email" value="" placeholder="Email" name="temail" class="text" size="30">
 										</div>
-										<div class="clearfix large_form form-item">
-											<input type="file" value="" placeholder="" name="file" class="file" size="30">
-										</div>
 										<div class="clearfix large_form form-password form-item">
 											<input type="password" value="" placeholder="Password" name="tpassword" class="password text" size="30">
 											<span class="cs-icon icon-eye"></span>
+										</div>
+										<div class="clearfix large_form form-item">
+											<input type="text" value="" placeholder="Mobile Number" name="mobile_no" class="text" maxlength="10">
+										</div>
+										<div class="clearfix large_form form-item">
+											<input type="file" value="" placeholder="" name="file" class="file" size="30">
 										</div>
 										<div class="action_bottom">
 											<input type="submit" class="_btn"  value="Create">

@@ -127,10 +127,13 @@
 																<div class="select clearfix">
 																	<div class="selector-wrapper variant-wrapper-size">
 																	
+																		<?php $sizes = explode("/",$cart_data[0]->p_pizza_size)?>
 																		<label for="product-select-option-0">Size</label>
-																		<?php foreach($cart_data as $data) { ?>
-																		<select class="single-option-selector" data-option="option1" id="product-select-option-0"><option value="Small"><?=$data->p_pizza_size;?></option></select>
-																		<?php } ?>
+																		<select class="single-option-selector" data-option="option1" id="product-select-option-0">
+																			<?php foreach($sizes as $size){?>
+																			<option value="<?=$size;?>"><?=$size;?></option>
+																			<?php } ?>
+																		</select>
 																	</div>
 																
 																</div>
@@ -162,46 +165,46 @@
 																You saved <span class="product-caption-price-new fa fa-rupee"><?= ($pro->p_price * $pro->p_discount)/100 ; ?></span>
 															</div>
 															<div class="purchase-section multiple">
-<script>
-$(document).ready(function(){
-	// disply_cart();
-	$("#cart").click(function(){
-		
-			var p_id=$(this).data("productid");
-			var p_name=$(this).data("productname");
-			var p_price=$(this).data("productprize");
-			var p_img=$(this).data("productimg");
-			
-			$.ajax({
-				url:"<?= base_url(); ?>Pizza/cart_insert",
-				method:"post",
-				data:{id:p_id,name:p_name,price:p_price,img:p_img}
-			})
-			.done(function(msg){
-				 $("#getmsg").html(msg);
-				$("#mymodel").modal('show');
-				disply_cart();
-			});
-	})	;
-	
-	
-	function disply_cart()
-	{
-			$.ajax({
-				url:"<?= base_url(); ?>Pizza/shoppingcart",
-				method:"post",
-				data:{}
-			})
-			.done(function(msg){
-				
-				 $("#cart_display").html(msg);
-				
-			});
-	
-	}
+																<script>
+																$(document).ready(function(){
+																	// disply_cart();
+																	$("#cart").click(function(){
+																		
+																			var p_id=$(this).data("productid");
+																			var p_name=$(this).data("productname");
+																			var p_price=$(this).data("productprize");
+																			var p_img=$(this).data("productimg");
+																			
+																			$.ajax({
+																				url:"<?= base_url(); ?>Pizza/cart_insert",
+																				method:"post",
+																				data:{id:p_id,name:p_name,price:p_price,img:p_img}
+																			})
+																			.done(function(msg){
+																				 $("#getmsg").html(msg);
+																				$("#mymodel").modal('show');
+																				disply_cart();
+																			});
+																	})	;
+																	
+																	
+																	function disply_cart()
+																	{
+																			$.ajax({
+																				url:"<?= base_url(); ?>Pizza/shoppingcart",
+																				method:"post",
+																				data:{}
+																			})
+																			.done(function(msg){
+																				
+																				 $("#cart_display").html(msg);
+																				
+																			});
+																	
+																	}
 
-});
-</script>
+																});
+																</script>
 																
 																<div class="purchase">
 																	<a   id="cart" data-productid="<?= $pro->p_id; ?>" data-productname="<?=  $pro->p_name; ?>"
@@ -218,7 +221,7 @@ $(document).ready(function(){
 												</div>
 											</div>
 											<!--end pro info -->
-											<div class="may-like-products col-sm-12">
+											<div class="may-like-products col-sm-12 hidden">
 												<div class="sub-title">
 													<h2>You May Also Like</h2>
 												</div>
@@ -329,18 +332,10 @@ $(document).ready(function(){
 																			</div>
 																			<div class="spr-content">
 																				<div class="spr-form" id="form_6537875078" style="display: none;">
-																					<form method="post" action="http://demo.designshopify.com/html_fastfood/" id="new-review-form_6537875078" class="new-review-form" onsubmit="SPR.submitForm(this);return false;"><input type="hidden" name="review[rating]"><input type="hidden" name="product_id" value="6537875078">
+																					<?php echo form_open('Pizza/add_review');?>
+																						<input type="hidden" name="review[rating]">
+																						<input type="hidden" name="review[product_id]" value="<?php echo $productId?>">
 																						<h3 class="spr-form-title">Write a review</h3>
-																						<fieldset class="spr-form-contact">
-																							<div class="spr-form-contact-name">
-																								<label class="spr-form-label" for="review_author_6537875078">Name</label>
-																								<input class="spr-form-input spr-form-input-text " id="review_author_6537875078" type="text" name="review[author]" value="" placeholder="Enter your name">
-																							</div>
-																							<div class="spr-form-contact-email">
-																								<label class="spr-form-label" for="review_email_6537875078">Email</label>
-																								<input class="spr-form-input spr-form-input-email " id="review_email_6537875078" type="email" name="review[email]" value="" placeholder="john.smith@example.com">
-																							</div>
-																						</fieldset>
 																						<fieldset class="spr-form-review">
 																							<div class="spr-form-review-rating">
 																								<label class="spr-form-label">Rating</label>
@@ -353,36 +348,38 @@ $(document).ready(function(){
 																								</div>
 																							</div>
 																							<div class="spr-form-review-title">
-																								<label class="spr-form-label" for="review_title_6537875078">Review Title</label>
-																								<input class="spr-form-input spr-form-input-text " id="review_title_6537875078" type="text" name="review[title]" value="" placeholder="Give your review a title">
+																								<label class="spr-form-label" for="review_title">Review Title</label>
+																								<input class="spr-form-input spr-form-input-text col-md-12" id="review_title" type="text" name="review[title]" value="" placeholder="Give your review a title">
 																							</div>
 																							<div class="spr-form-review-body">
-																								<label class="spr-form-label" for="review_body_6537875078">Body of Review <span class="spr-form-review-body-charactersremaining">(1500)</span></label>
+																								<label class="spr-form-label" for="review_body">Body of Review <span class="spr-form-review-body-charactersremaining">(1500)</span></label>
 																								<div class="spr-form-input">
-																									<textarea class="spr-form-input spr-form-input-textarea " id="review_body_6537875078" data-product-id="6537875078" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
-
+																									<textarea class="spr-form-input spr-form-input-textarea col-md-12" id="review_body" data-product-id="6537875078" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
 																								</div>
 																							</div>
-																						</fieldset>
-																						<fieldset class="spr-form-actions">
-																							<input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
+																							<br><br><br><br>
+																							<div class="spr-form-review-body">
+																								<input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
+																							</div>
 																						</fieldset>
 																					</form>
 																				</div>
 																				<div class="spr-reviews" id="reviews_6537875078">
-																					<div class="spr-review" id="spr-review-7003642">
+																					<?php foreach($reviews as $review){?>
+																					<div class="spr-review" id="spr-review-">
 																						<div class="spr-review-header">
 																							<span class="spr-starratings spr-review-header-starratings"><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i></span>
-																							<h3 class="spr-review-header-title">FRENCH CONNECTION, SUNDAY BLISS BAG</h3>
-																							<span class="spr-review-header-byline"><strong>Jin Alkaid</strong> on <strong>Jun 10, 2017</strong></span>
+																							<h3 class="spr-review-header-title"><?php echo $review->title?></h3>
+																							<span class="spr-review-header-byline"><strong><?php echo $review->title?></strong> on <strong><?php echo date("D m,Y H:i")?></strong></span>
 																						</div>
 																						<div class="spr-review-content">
-																							<p class="spr-review-content-body">FRENCH CONNECTION, SUNDAY BLISS BAG</p>
+																							<p class="spr-review-content-body"><?php echo nl2br($review->	body);?></p>
 																						</div>
-																						<div class="spr-review-footer">
+																						<div class="spr-review-footer hidden">
 																							<a href="#" class="spr-review-reportreview" onclick="SPR.reportReview(7003642);return false" id="report_7003642" data-msg="This review has been reported">Report as Inappropriate</a>
 																						</div>
 																					</div>
+																					<?php }?>
 																				</div>
 																			</div>
 																		</div>
