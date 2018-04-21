@@ -47,16 +47,21 @@
 							<?php foreach($data as $d){ ?>
 							<?php $p_i=explode(",",$d->p_img); ?>
 							<li class="wlr wishlist-juice-ice-tea-1 wishlist-added">
-								<div class="wishlist-image wishlist-image-213224194087"><?=str_ireplace("height='100' width='100'","",$p_i[0])?></div>
-								<div class="wishlist-name"><a href="<?=base_url();?>#"><?=$d->p_name;?></a></div>
-								<div class="wishlist-price wishlist-price-213224194087"><span class="price"><span class="money" data-currency-usd="$20.00" data-currency="USD"><?=$d->p_price;?></span></span>
+								<div class="wishlist-image"><?php echo anchor('Pizza/product_info/?pid='.$d->w_prod_id, str_ireplace("height='100' width='100'","",$p_i[0])) ?></div>
+								<div class="wishlist-name"><?php echo anchor('Pizza/product_info/?pid='.$d->w_prod_id, $d->p_name) ?></div>
+								<div class="wishlist-price">
+									<span class="price">
+										<span class="money fa fa-rupee" ><?= getPrice($d->p_price,$d->p_discount);?></span>
+									</span>
 								</div>
 								<div class="wishlist-addCart">
-									<form action="http://demo.designshopify.com/html_fastfood/cart.html" method="post" class="variants" enctype="multipart/form-data">
-										<div class="others-bottom"><a href="<?=base_url();?>cart.html" class=" wishlist-addToCart _btn btn-quick-shop add-to-cart" style="opacity: 1;">Add to cart</a></div>
-									</form>
+									<a data-productid="<?= $d->w_prod_id; ?>" data-productname="<?=  $d->p_name; ?>"
+								                              data-productprize="<?=  getPrice($d->p_price,$d->p_discount) ?>"
+								                              data-productimg="<?=getImgUrl($p_i[0])?>" class="_btn add-to-cart" type="submit" name="add"><span><i class="cs-icon icon-cart"></i>Add to cart</span></a>
 								</div>
-								<div class="wishlist-remove" data-wishlisthandle="juice-ice-tea-1"><span class="cs-icon icon-bin"></span></div>
+								<div class="wishlist-remove" data-wishlisthandle="juice-ice-tea-1">									
+									<?php echo anchor('Pizza/remove_wishlist/?id='.$d->w_id, '<span class="cs-icon icon-bin"></span>',array("onclick"=>"return confirm('Are you sure want to remove from Wishlist?')")) ?>
+								</div>
 							</li>
 							<?php } ?>
 						</ul>
@@ -65,3 +70,44 @@
 			</div>
 		</main>
 	</div>
+<script>
+$(document).ready(function(){
+	// disply_cart();
+	$(".add-to-cart").click(function(){
+		
+			var p_id=$(this).data("productid");
+			var p_name=$(this).data("productname");
+			var p_price=$(this).data("productprize");
+			var p_img=$(this).data("productimg");
+			
+			$.ajax({
+				url:"<?= base_url(); ?>Pizza/cart_insert",
+				method:"post",
+				data:{id:p_id,name:p_name,price:p_price,img:p_img}
+			})
+			.done(function(msg){
+				 $("#getmsg").html(msg);
+				$("#mymodel").modal('show');
+			});
+	})	;	
+});
+</script>
+<div class="modal fade" id="mymodel" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> Add cart</h4>
+        </div>
+        <div class="modal-body">
+          <p class="" id="getmsg"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+</div>

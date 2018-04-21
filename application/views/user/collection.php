@@ -80,9 +80,9 @@
 													</h3>
 													<div class="sidebar-content">
 														<ul class="list-cat">
-															<li class="active"><a href="">All Collections </a></li>
-															<?php foreach($menu as $m) { ?>
-															<li><a href="<?=base_url();?>Pizza/collection/?c=<?=$m->m_id;?>"><?= $m->m_name;?> </a></li>
+															<li  class="<?php echo $category==0?"active":""?>"><?php echo anchor("Pizza/collection/?main=1&c=0", "All Collections")?></li>
+															<?php foreach($menu as $m) { ?>															
+															<li class="<?php echo $category==$m->m_id?"active":""?>"><?php echo anchor("Pizza/collection/?main=1&c=".$m->m_id, $m->m_name)?></li>
 															<?php } ?>
 														</ul>
 													</div>
@@ -157,6 +157,7 @@
 													</div>
 												</div>
 											</div>
+											<?php if(!empty($pizza_data)) { ?>
 											<div class="collection-items clearfix">
 												<div class="products">
 												<?php foreach($pizza_data as $pdata) { ?>
@@ -279,7 +280,10 @@
 												<?php } ?>
 												</div>
 											</div>
-											<div class="collection-bottom-toolbar">
+												<?php }else{ ?>
+													<div class="alert ">No product available in this category, Please select another category.</div>
+												<?php }?>
+											<div class="collection-bottom-toolbar hidden">
 												<div class="product-counter col-sm-6">
 													Items 1 to 18 of 20 total
 												</div>

@@ -21,7 +21,8 @@
 											<th></th>
 										</tr>
 									</thead>
-									<tbody>													
+									<tbody>					
+										<?php if(!empty($orders)){?>
 										<?php foreach($orders as $order){?>   									
 										<tr>
 											<td><?php echo anchor('Order/detail?order_id='.$order->id, $order->id) ?></td>
@@ -33,6 +34,11 @@
 											<td><i class="fa fa-rupee"></i> <?= $order->amount + $order->shipping_charge; ?></td>
 											<td><?php echo anchor('Order/detail?order_id='.$order->id, 'View') ?></td>
 										</tr>										
+										<?php }?>
+										<?php }else{?>
+										<tr>
+											<td colspan="5" class="text-danger">No Order found!</td>
+										</tr>	
 										<?php }?>
 									</tbody>
 								</table>																							

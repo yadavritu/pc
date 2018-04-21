@@ -5,7 +5,7 @@ class Order extends CI_Controller{
 			$order = $this->input->post('order');
 			//Calculate Shipping Charge
 			$storeAddress = $this->config->item('store_address');
-			$addressCoordinate = get_coordinates($order['address'],$storeAddress['city'],$storeAddress['state'],$order['pincode']);
+			$addressCoordinate = get_coordinates($order['address']." ".$order['landmark'],$storeAddress['city'],$storeAddress['state'],$order['pincode']);
 			if(empty($addressCoordinate)){
 				die("Invalid Address");
 			}
@@ -33,9 +33,7 @@ class Order extends CI_Controller{
 	}	
 		
 	function buy(){
-		$sess=$this->session->userdata("clinte");
-		$val=$sess['Admin_ID'];
-		if(!$val){
+		if(!getUserId()){
 			 redirect(base_url()."Pizza/login/?login=true");
 		}elseif($this->cart->total_items() > 0){
 			//Set variables for paypal form
@@ -43,7 +41,6 @@ class Order extends CI_Controller{
 			$cancelURL = base_url().'order/cancel'; //payment cancel url
 			$notifyURL = base_url().'order/ipn'; //ipn url
 			//get particular product data
-			$userID = $val; //current user id
 			$logo = base_url().'assets/images/codexworld-logo.png';
 			
 			$this->paypal_lib->add_field('return', $returnURL);
@@ -76,7 +73,7 @@ class Order extends CI_Controller{
 			$this->paypal_lib->image($logo);
 			//Add Detail to Order Table START
 			$orderInfo = array(
-				'user_id' => $userID,
+				'user_id' => getUserId(),
 				'type' => "Online",
 				'flat_no' => $order['flat_no'],
 				'address' => $order['address'],
@@ -85,6 +82,7 @@ class Order extends CI_Controller{
 				'latitude' => $order['latitude'],
 				'longitude' => $order['longitude'],
 				'distance' => $order['distance']['distance'],
+				'note' 		=> $order['note'],
 				'amount' => $this->cart->total(),
 				'shipping_charge' => $shippingCharge['charge'],
 				'created' => date("Y-m-d H:i:s"),
@@ -120,20 +118,27 @@ class Order extends CI_Controller{
 		$this->footer(); 
 	}
 	public function ipn(){
-		if($this->paypal_lib->validate_ipn()){
+		if(1 ||$this->paypal_lib->validate_ipn()){
 			//$this->paypal_lib->ipn_data;
 			$payment_status = "Paid";
 			$transaction_id = "1da5s4d5s45as4d5";
-			$orderId = 1;
+			$orderId = 8;
 			//Update Order Status
 			$this->db->query("update orders set payment_status = '$payment_status',transaction_id='$transaction_id' where id='$orderId'");
+			//Get Customer Detail
+			$user=$this->db->query("select r_name,mobile_no,amount,shipping_charge from reg LEFT JOIN orders ON user_id = r_id WHERE orders.id=".$orderId);
+			$userDetail=$user->result();
+			if(!empty($userDetail[0]->mobile_no)){
+				//Send Message to Customer for Order
+				$message = "Hello ".$userDetail[0]->r_name."\nWe received your order at Pizza Corner.\nOrder No: ".$orderId."\nTotal Paid: ".($userDetail[0]->amount+$userDetail[0]->shipping_charge);
+				sendSms($userDetail[0]->mobile_no,$message);	
+			}
 		}
 		exit;
 	}
 	public function head($homepage=false)
 	{	
-		$q2['sess']=$this->session->userdata('clinte');
-		
+		$q2['sess']=$this->session->userdata('clinte');		
 		$l=$this->db->query("select * from logo where l_status='unblock'");
 		$q2['logo']=$l->result();
 		$q1=$this->db->query("select * from menu where m_status='unblock'");
@@ -161,18 +166,16 @@ class Order extends CI_Controller{
 		$this->load->view("user/footer",$a);
 	}
 	public function history(){
-		$session = $this->session->userdata('clinte');
-		$order=$this->db->query("select * from orders where user_id= ".$session['Admin_ID']." AND payment_status='Paid' ORDER BY created DESC");
+		$order=$this->db->query("select * from orders where user_id= ".getUserId()." AND payment_status='Paid' ORDER BY created DESC");
 		$data['orders'] = $order->result();
 		$this->head(); 
 		$this->load->view('order/history',$data);
 		$this->footer(); 		
 	}
 	public function detail(){
-		$session = $this->session->userdata('clinte');
 		$orderId = $this->input->get('order_id');
 		
-		$order = $this->db->query("select * from orders where user_id= ".$session['Admin_ID']." AND payment_status='Paid' AND id=".$orderId);
+		$order = $this->db->query("select * from orders where user_id= ".getUserId()." AND payment_status='Paid' AND id=".$orderId);
 		$data['order'] = $order->result();
 		if(empty($data['order'])){
 			redirect(base_url()."Order/history");	

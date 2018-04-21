@@ -208,43 +208,26 @@ class Pizza extends CI_Controller
 	} 
 	public function collection()
 	{	
+		$isMain = $this->input->get('main','s_id');
+		
 		$id=$this->input->get('c');
-		$ct=$this->db->query("select * from product where p_status='unblock' and m_id='$id' ");
-		$a1['pizza_data']=$ct->result();				
+		$field = !empty($isMain)?"m_id":"s_id";
+		$condition = !empty($id)?("AND ".$field."=".$id):"";
+		
+		$ct=$this->db->query("select * from product where p_status='unblock' ".$condition);
+		$a1['pizza_data']=$ct->result();	
+		
 		$p=$this->db->query("select * from pizza_types where pizza_status='unblock'");
-		$a1['pizza']=$p->result();
-		
-		$q1=$this->db->query("select * from product where  p_status='unblock'");
-		$a1['cart_data']=$q1->result();
-		
+		$a1['pizza']=$p->result();		
 		
 		$a1['this1']=$this;
 		$a1['action']=base_url()."Pizza/collection_insert";
+		$a1['category'] = $id;
 		$this->head();
 		$this->load->view('user/collection',$a1);
 		$this->footer();
 		
-	}
-	public function collection1()
-	{	
-		$id=$this->input->get('c');
-		$ct=$this->db->query("select * from product where p_status='unblock' and s_id='$id' ");
-		$a1['pizza_data']=$ct->result();
-				
-		$p=$this->db->query("select * from pizza_types where pizza_status='unblock'");
-		$a1['pizza']=$p->result();
-		
-		$q1=$this->db->query("select * from product where  p_status='unblock'");
-		$a1['cart_data']=$q1->result();
-		
-		$a1['sess']=$this->session->userdata('clinte');	
-		
-		$a1['this1']=$this;
-		$a1['action']=base_url()."Pizza/collection_insert";
-		$this->head();
-		$this->load->view('user/collection',$a1);
-		$this->footer();
-	}
+	}	
 	public function feedback()
 	{
 		$this->head();
@@ -436,17 +419,20 @@ class Pizza extends CI_Controller
 }
 	public function show_wishlist()
 	{
-		$md['this1']=$this;		
-		$md['sess']=$this->session->userdata('clinte');			
-		$d=$this->session->userdata('clinte');
-		$usr_id=$d['Admin_ID'];
-		$r=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id='$usr_id'");
-		$md['data']=$r->result();
-		$md['wish_total']=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id='$usr_id'")->num_rows();
+		$data['this1']=$this;
+		$wishlist=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id=".getUserId());
+		$data['data']=$wishlist->result();
+		$data['wish_total']=$this->db->query("select * from wishlist inner join product on wishlist.w_prod_id=product.p_id where w_user_id=".getUserId())->num_rows();
 		
 		$this->head();
-		$this->load->view('user/wishlist',$md);
+		$this->load->view('user/wishlist',$data);
 		$this->footer();
+	}
+	public function remove_wishlist()
+	{
+		$sql = "DELETE FROM wishlist WHERE w_id = ".$this->input->get('id');			
+		$this->db->query($sql);
+		redirect(base_url()."Pizza/show_wishlist");
 	}
 	
 	public function contact()

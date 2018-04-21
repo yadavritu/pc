@@ -64,6 +64,7 @@
 												</tr>
 											</thead>
 											<tbody>													
+												<?php $quantity = 0;?>
 												<?php foreach($orderDetail as $item){?>   									
 												<tr>
 													<td class="table-shopping-cart-img">
@@ -76,12 +77,15 @@
 													</td>
 													<td><i class="fa fa-rupee"></i> <?= $item->product_price; ?></td>
 													<td>
-														<?php echo $item->quantity; ?>
+														<?php 
+															echo $item->quantity; 
+															$quantity+=$item->quantity;
+														?>
 													</td>
 													<td><i class="fa fa-rupee"></i> <?= $item->product_price*$item->quantity; ?></td>						
 												</tr>										
 												<?php  } ?>
-												<?php if(!empty($order[0]->shipping_charge)){?>
+												<?php if($order[0]->shipping_charge > 0){?>
 													<td class="table-shopping-cart-img" >
 													</td>
 													<td class="table-shopping-cart-title">Shipping Charge</a>
@@ -96,7 +100,7 @@
 											<thead>
 												<tr>
 													<th colspan="3">Gross Total</th>
-													<th><?php echo $order[0]->id?></th>
+													<th><?php echo $quantity?></th>
 													<th><i class="fa fa-rupee"></i> <?php echo $order[0]->amount+$order[0]->shipping_charge?></th>
 												</tr>
 											</thead>

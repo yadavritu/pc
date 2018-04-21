@@ -92,7 +92,7 @@
 									<li><a href="<?= base_url();?>Pizza"><span>HOME<span></a><li>		
 									<?php foreach($menu as $m) { ?>
 									<li class="nav-item dropdown navigation">
-									<a href="<?=base_url();?>Pizza/collection/?c=<?=$m->m_id;?>" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+									<a href="<?=base_url();?>Pizza/collection/?main=1&c=<?=$m->m_id;?>" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
 									<span><?=$m->m_name;?></span>
 									<i class="fa fa-angle-down"></i>
 									<i class="sub-dropdown1  visible-sm visible-md visible-lg"></i>
@@ -148,6 +148,9 @@
 																<?php if($sess==''){ ?>
 																	<li class="account-item-title active">
 																		<?php echo anchor('Pizza/login', 'Login') ?>
+																	</li>
+																	<li class="account-item-title active">
+																		<?php echo anchor('Pizza/reg', 'Register') ?>
 																	</li>
 																<?php } else { ?>
 																	<li class="account-item-title active">

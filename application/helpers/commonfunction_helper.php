@@ -98,3 +98,25 @@ function getShippingCharge($distance,$charge,$free){
 			'charge' => 0,
 		);;
 }
+function getUserId(){
+	$CI = & get_instance();
+	//$md['sess']=$CI->session->userdata('clinte');			
+	$d = $CI->session->userdata('clinte');
+	return $d['Admin_ID'];
+}
+function sendSms($mobileNo,$message){
+	$url = "login.bulksmsgateway.in/sendmessage.php?user=securemetasys&password=9429089148&mobile=" . urlencode($mobileNo) . "&sender=PIZACO&message=" . urlencode($message) . "&type=" . urlencode('3');
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$curl_scraped_page = curl_exec($ch);
+	curl_close($ch);
+}
+function getPrice($price,$discount = 0){
+	return $price - ($price * $discount)/100;
+}
+function getImgUrl($img){
+	$re=str_ireplace("<img src='"," ",$img);
+	$img_array=explode("'",$re);
+	$img_array[0] = trim($img_array[0]);
+	return isset($img_array[0])?$img_array[0]:"";
+}
