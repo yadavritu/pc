@@ -130,3 +130,4 @@ ALTER TABLE `order_details`
 
 
 ALTER TABLE `reg` ADD `mobile_no` VARCHAR(15) NOT NULL AFTER `r_lname`;
+ALTER TABLE `orders` ADD `note` TEXT NOT NULL AFTER `transaction_id`;
