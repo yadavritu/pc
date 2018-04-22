@@ -304,6 +304,10 @@ class Pizza extends CI_Controller
 		$data['productId']=$id;
 		$q1=$this->db->query("select * from product where  p_status='unblock' and `p_id`='$id'");
 		$data['cart_data']=$q1->result();
+		if(empty($data['cart_data'])){
+			$this->session->set_flashdata('error', 'Product not available.');
+			redirect(base_url()."Pizza/index");	
+		}
 		//GET REVIEW
 		$review = $this->db->query("select reviews.*,CONCAT(reg.r_name,' ',reg.r_lname) name from reviews LEFT JOIN reg on user_id=r_id where `product_id`='$id'");
 		$data['reviews'] = $review->result();

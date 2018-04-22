@@ -102,9 +102,15 @@
 													<h1 itemprop="name" class="title"><?= $pro->p_name;?></h1>
 													<div class="rating-content">
 														<div class="rating-description">
-															<span class="spr-badge" data-rating="5.0"><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" style=""></i>
-															<i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i>
-															<i class="spr-icon spr-icon-star" style=""></i></span><span class="spr-badge-caption"><?php echo $cart_data[0]->review_count?> review</span>
+															<span class="spr-badge" data-rating="<?php echo getRating($cart_data[0]->rating,$cart_data[0]->review_count)?>">
+																<span class="spr-starrating spr-badge-starrating">
+																	<i class="spr-icon spr-icon-star" style=""></i>
+																	<i class="spr-icon spr-icon-star" style=""></i>
+																	<i class="spr-icon spr-icon-star" style=""></i>
+																	<i class="spr-icon spr-icon-star" style=""></i>
+																	<i class="spr-icon spr-icon-star" style=""></i>
+																</span>
+																<span class="spr-badge-caption"><?php echo $cart_data[0]->review_count?> review</span>
 															</span>											
 															<span class="review-link"><a href="#review">Write a review</a></span>
 														</div>

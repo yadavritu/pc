@@ -122,5 +122,5 @@ function getImgUrl($img){
 	return isset($img_array[0])?$img_array[0]:"";
 }
 function getRating($rating,$total){
-	return ceil($rating/$total);
+	return empty($total)?5:ceil($rating/$total);
 }
