@@ -114,6 +114,7 @@
 									</li>
 									<?php } ?>
 									<li><a href="<?= base_url();?>Pizza/about"><span>About Us<span></a><li>		
+									<li><a href="<?= base_url();?>Pizza/feedback"><span>FAQs<span></a><li>		
 									</ul>
 									</div>
 										<div class="nav-icon">
