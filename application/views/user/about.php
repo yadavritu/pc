@@ -66,10 +66,10 @@
 										<div class="introduction_inner">
 											<div class="page_title">
 												<h2 class="title">
-													<span class="first">About</span>
-													<span class="last"> Yummy</span>
+													<span class="first">Pizza</span>
+													<span class="last">Corner</span>
 												</h2>
-												<p class="caption">Tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis amet voluptas assumenda est, omnis dolor repellendus quis nostrum. Temporibus autem quibusdam et aut officiis debitis aut rerum dolorem necessitatibus saepe eveniet ut et neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+												<p class="caption">Pizza Corner was an international franchise of pizzeria chains that offers a wide range of pizzas, pastas and side dishes from chicken wings to salads. Pizza Corner operated as both standalone restaurants or combined with other Global Franchise Architects brands such as Coffee World or Cream & Fudge. Its service formats include: large dine-in restaurants, delivery outlets, express dine-ins, and express kiosks</p>
 											</div>
 											
 										</div>
@@ -78,9 +78,9 @@
 										<div class="page_title">
 											<h2 class="title">
 												<span class="first">Our</span>
-												<span class="last"> Yummy Team</span>
+												<span class="last"> Pizza Team</span>
 											</h2>
-											<p class="caption">Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat</p>
+											<p class="caption">Pizza Corner was a brand of Global Franchise Architects (GFA), a Geneva, Switzerland-based company that builds, operates, and franchises a specialty food service brands.</p>
 										</div>
 										<div class="team_inner">
 											<div class="team_content">
@@ -90,7 +90,7 @@
 													</div>
 													<div class="item_content">
 														<p class="item_name">
-															sara bethel
+															Papa John
 														</p><br><br>
 														<p class="item_position">
 															Chef
@@ -100,7 +100,7 @@
 												
 														<br>
 														<p class="item_description">
-															Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat
+															Pizza Corner has 70 outlets in Southern India, Papa John’s has 15 restaurants across India. Global Franchise Architects’s operations for its other brands - Cream & Fudge, Coffee World and The Donut Baker will remain in Bangalore and work independently of Papa John’s.
 														</p>
 													</div>
 												</div>
@@ -110,13 +110,13 @@
 													</div>
 													<div class="item_content">
 														<p class="item_name">
-															odio tincidunt
+															 Hainan
 														</p>
 														<p class="item_position">
 															CEO/Founder
 														</p>
 														<p class="item_description">
-															Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat
+															Pizza Corner's operations in China were concentrated on the tourist-friendly Hainan Island, especially on the capital city Haikou and the seaside district of Sanya. Emperor Food Franchise Concepts Ltd[7] opened the first Pizza Corner outlet on Hainan Island in 2007.n ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat
 														</p>
 													</div>
 												</div>
@@ -126,13 +126,13 @@
 													</div>
 													<div class="item_content">
 														<p class="item_name">
-															odio tincidunt
+															 Geneva
 														</p>
 														<p class="item_position">
 															Chef
 														</p>
 														<p class="item_description">
-															Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat
+															Pizza Corner was a brand of Global Franchise Architects (GFA), a Geneva, Switzerland-based company that builds, operates, and franchises a specialty food service brands.
 														</p>
 													</div>
 												</div>

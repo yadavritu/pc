@@ -124,3 +124,6 @@ function getImgUrl($img){
 function getRating($rating,$total){
 	return empty($total)?5:ceil($rating/$total);
 }
+function getUploadPath($folder){
+	return realpath(APPPATH . '../uploads/'.$folder)."/";
+}
