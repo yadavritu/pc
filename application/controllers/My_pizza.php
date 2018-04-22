@@ -1585,23 +1585,29 @@ public function product2()
 		$this->sidebar("");
 		$a['action']=base_url()."My_pizza/order_add";
 		$a["heading1"]="Manage Order Insert";
-		$a['link']="My_pizza/display_order/order_table/o_id/";
+		$a['link']="My_pizza/display_order/orders/user_id/";
 		$this->load->view("order",$a);	
 		
 	}
 	public function order_add()
 	{
 		$order_data=array(
-		
-		"o_name"=>$this->input->post("o_name"),
-		"o_address"=>$this->input->post("o_address"),
-		"o_qty"=>$this->input->post("o_qty"),
-		"o_amount"=>$this->input->post("o_amount"),
-		"o_time"=>$this->input->post("o_time")
-		
+		'user_id' => getUserId(),
+				'type' => "Online",
+				'flat_no' => $order['flat_no'],
+				'address' => $order['address'],
+				'landmark' => $order['landmark'],
+				'zipcode' => $order['pincode'],
+				'latitude' => $order['latitude'],
+				'longitude' => $order['longitude'],
+				'distance' => $order['distance']['distance'],
+				'note' 	    => $order['note'],
+				'amount' => $this->cart->total(),
+				'shipping_charge' => $shippingCharge['charge'],
+				'created' => date("Y-m-d H:i:s"),
 		
 		);
-		$r=$this->my_model->insert_Data('order_table',$order_data);
+		$r=$this->my_model->insert_Data('orders',$order_data);
 		if($r=='1')
 		{
 			redirect(base_url()."My_pizza/order/?oder=done");
@@ -1616,15 +1622,24 @@ public function product2()
 		$this->sidebar("");
 		// ************ Add action here********************//
 		$data=array(	
-		'ID'=>"o_id",
-		'User Name'=>"o_name",	
-		'Order Address'=>"o_address",	
-		'Order Quntity'=>"o_qty",	
-		'Order Amuont'=>"o_amount",	
-		'Order Time'=>"o_time",	
+		'ID'=>"user_id",
+		'User ID'=>getUserId(),	
+		'Type'=>"Online	",	
+		'Flat No'=>$order['flat_no'],	
+		'Address'=>$order['address'],	
+		'Landmark'=>$order['landmark'],	
+		'Zipcode'=>$order['pincode'],	
+		'Latitude'=>$order['latitude'],	
+		'Longitude'=> $order['longitude'],	
+		'Distance'=> $order['distance']['distance'],	
+		'Amount'=> $this->cart->total(),	
+		'Shipping Charge'=>$shippingCharge['charge'],	
+		'Status'=>$order['status'],	
+		'Note'=>$order['note'],	
+		'Created	'=>date("Y-m-d H:i:s"),	
 				);	
 		$redirect=base_url()."My_pizza/display_order/$tbl/$id";
-		$edit="My_pizza/order/";
+		$edit="My_pizza/orders/";
 		$heading="Display data of order";
 		$this->my_lib->show_order($tbl,$data,$id);
 		//************ action close here******************//

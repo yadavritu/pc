@@ -131,7 +131,7 @@
 															<link itemprop="availability" href="http://schema.org/InStock">
 															<div class="product-type">
 																<div class="select clearfix">
-																	<div class="selector-wrapper variant-wrapper-size">
+																	<div class="selector-wrapper variant-wrapper-size hidden">
 																	
 																		<?php $sizes = explode("/",$cart_data[0]->p_pizza_size)?>
 																		<label for="product-select-option-0">Size</label>
@@ -307,10 +307,7 @@
 												<div class="col-md-12 tabs-content">
 													<div class="tab-content">
 														<div class="tab-pane active" id="desc">
-															<p>Lorem Ipsum. </p>
-															<ul class="angle-right">
-																<li>Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.</li>
-																</ul>
+															<?php echo $cart_data[0]->p_discription?>
 														</div>
 														<div class="tab-pane fade " id="review">
 															<div id="customer_review">
@@ -363,7 +360,7 @@
 																									<textarea class="spr-form-input spr-form-input-textarea col-md-12" id="review_body" data-product-id="6537875078" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
 																								</div>
 																							</div>
-																							<br><br><br><br><br><br>
+																							<br><br><br>
 																							<div class="spr-form-review-body">
 																								<input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
 																							</div>

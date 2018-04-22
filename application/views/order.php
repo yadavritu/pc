@@ -37,7 +37,7 @@
 				<?=form_open_multipart($action);?>
 				<div class="form-group row">
 			
-				<label class="col-sm-4 control-label" for="">ENTER ORDER NAME</label>
+				<label class="col-sm-4 control-label" for="">User Name</label>
 				<div class="col-sm-8">
 				<input class="form-control"value="" placeholder="Enter order Name" type="text"  name="o_name">
 				</div>

@@ -82,7 +82,7 @@ class Order extends CI_Controller{
 				'latitude' => $order['latitude'],
 				'longitude' => $order['longitude'],
 				'distance' => $order['distance']['distance'],
-				'note' 		=> $order['note'],
+				'note' 	    => $order['note'],
 				'amount' => $this->cart->total(),
 				'shipping_charge' => $shippingCharge['charge'],
 				'created' => date("Y-m-d H:i:s"),
