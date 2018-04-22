@@ -6,7 +6,7 @@
 				
 				<div class="top-banner">
 					<div class="top-banner-title"><?=$heading;?></div>
-					<div class="top-banner-subtitle">Welcome back, John Doe, <i class="fa fa-map-marker"></i> New York City</div>
+					<div class="top-banner-subtitle"></div>
 				</div>
 
 				<div class="content">

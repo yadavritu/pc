@@ -176,6 +176,8 @@ class My_pizza extends CI_Controller
 	{
 		$a['menu']=array(
 		"a"=>"My_pizza/dash,Dashboard,fa fa-dashboard",
+		'o'=>"My_pizza/order_history,Orders, fa fa-tags",
+		'r'=>"My_pizza/reg_display/reg/r_id/r_status,Customers ,fa fa-registered",
 		"b"=>"My_pizza/menu,Menu,fa fa-bars",
 		"c"=>"My_pizza/sub_menu,SubMenu,fa fa-list",
 		'd'=>"My_pizza/banner,Manage banner,fa fa-image",
@@ -184,10 +186,8 @@ class My_pizza extends CI_Controller
 		'g'=>"My_pizza/pizza_types,Manage pizza types,fa fa-file-text-o",
 		'h'=>"My_pizza/product,Manage product ,fa fa-product-hunt",
 		'i'=>"My_pizza/gallery,Manage Gallery ,fa fa-file-image-o",
-		'j'=>"My_pizza/coupon,Manage Coupon, fa fa-tags",
-		'o'=>"My_pizza/Order,Manage Order, fa fa-tags",
+		//'j'=>"My_pizza/coupon,Manage Coupon, fa fa-tags",
 			
-		'r'=>"My_pizza/reg_display/reg/r_id/r_status,Display Reg ,fa fa-registered",
 		'feedback'=>"My_pizza/feedback_display/feedback/f_id/f_status,Display Feedback ,fa fa-commenting-o"
 		 
 		
@@ -1318,15 +1318,15 @@ public function product2()
 		// ************ Add action here********************//
 		$data=array(	
 		
-		'Reg Id'=>"r_id",
-		'Reg Name'=>"r_name",	
-		'Reg Last Name'=>"r_lname",	
-		'Reg Email'=>"r_email",	
-		'Reg Password'=>"r_password",	
+		'Id'=>"r_id",
+		'First Name'=>"r_name",	
+		'Last Name'=>"r_lname",	
+		'Email Address'=>"r_email",	
+		//'Reg Password'=>"r_password",	
 				);	
 		$redirect=base_url()."My_pizza/reg_display/$tbl/$id/$status";
 		$edit="Pizza/reg/";
-		$heading="Display data of Reg_display Records";
+		$heading="Customers";
 		$this->my_lib->show_lib($tbl,$data,$id,$status,$redirect,$edit,$heading);
 		//************ action close here******************//
 	
@@ -1617,32 +1617,35 @@ public function product2()
 			redirect(base_url()."My_pizza/order/?oder=notdone");
 		}
 	}
-	public function display_order($tbl,$id)
-	{
+	public function order_history(){
 		$this->sidebar("");
-		// ************ Add action here********************//
-		$data=array(	
-		'ID'=>"user_id",
-		'User ID'=>getUserId(),	
-		'Type'=>"Online	",	
-		'Flat No'=>$order['flat_no'],	
-		'Address'=>$order['address'],	
-		'Landmark'=>$order['landmark'],	
-		'Zipcode'=>$order['pincode'],	
-		'Latitude'=>$order['latitude'],	
-		'Longitude'=> $order['longitude'],	
-		'Distance'=> $order['distance']['distance'],	
-		'Amount'=> $this->cart->total(),	
-		'Shipping Charge'=>$shippingCharge['charge'],	
-		'Status'=>$order['status'],	
-		'Note'=>$order['note'],	
-		'Created	'=>date("Y-m-d H:i:s"),	
-				);	
-		$redirect=base_url()."My_pizza/display_order/$tbl/$id";
-		$edit="My_pizza/orders/";
-		$heading="Display data of order";
-		$this->my_lib->show_order($tbl,$data,$id);
-		//************ action close here******************//
+		$order=$this->db->query("select orders.*, r_name,r_lname from orders LEFT JOIN reg ON user_id = r_id where payment_status='Paid' ORDER BY created DESC");
+		$data['heading']="Orders";
+		$data['heading1']="Order Detail";
+		$data['orders'] = $order->result();
+		$this->load->view('order_history',$data);
+	}
+	public function order_detail(){
+		$orderId = $this->input->get('order_id');
+		
+		$order = $this->db->query("select orders.*, r_name,r_lname from orders LEFT JOIN reg ON user_id = r_id where payment_status='Paid' AND id=".$orderId);
+		$data['order'] = $order->result();
+		if(empty($data['order'])){
+			redirect(base_url()."My_pizza/order_history");	
+		}
+		$orderDetail = $this->db->query("select * from order_details where order_id= ".$orderId);
+		$data['heading']="Orders";
+		$data['heading1']="Order Detail";
+		
+		$data['orderDetail'] = $orderDetail->result();
+		$this->sidebar("");
+		$this->load->view('order_detail',$data);	
+	}
+	public function order_update(){
+		$orderId = $this->input->get('order_id');
+		$status = $this->input->get('status');
+		$this->db->query("update orders set status = '$status' where id='$orderId'");
+		redirect(base_url()."My_pizza/order_detail?order_id=".$orderId);
 	}
 	public function user_data()
 	{
