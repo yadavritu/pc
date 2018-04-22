@@ -121,3 +121,6 @@ function getImgUrl($img){
 	$img_array[0] = trim($img_array[0]);
 	return isset($img_array[0])?$img_array[0]:"";
 }
+function getRating($rating,$total){
+	return ceil($rating/$total);
+}

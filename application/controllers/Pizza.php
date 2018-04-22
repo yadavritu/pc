@@ -305,7 +305,7 @@ class Pizza extends CI_Controller
 		$q1=$this->db->query("select * from product where  p_status='unblock' and `p_id`='$id'");
 		$data['cart_data']=$q1->result();
 		//GET REVIEW
-		$review = $this->db->query("select * from reviews where `product_id`='$id'");
+		$review = $this->db->query("select reviews.*,CONCAT(reg.r_name,' ',reg.r_lname) name from reviews LEFT JOIN reg on user_id=r_id where `product_id`='$id'");
 		$data['reviews'] = $review->result();
 		$this->head();
 		$this->load->view('user/product_info',$data);
@@ -487,6 +487,7 @@ class Pizza extends CI_Controller
 	}
 	public function profile()
 	{
+		$this->checkLogin();
 		$this->head();
 		$a['action']=base_url()."Pizza/profile_in";
 		$a['user_data']=$this->session->userdata("clinte");
@@ -511,7 +512,7 @@ class Pizza extends CI_Controller
 		
 		
 	
-		public function change_new_password()
+	public function change_new_password()
 	{
 		$change=$this->input->post('submenu');
 		$me=$this->session->userdata("clinte");
@@ -554,13 +555,22 @@ class Pizza extends CI_Controller
 	
 	}
 	function add_review(){
+		$this->checkLogin();
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$review = $this->input->post('review');
 			$review['user_id'] = getUserId();
 			$review['created'] = date("Y-m-d H:i:s");
-			$this->db->insert('reviews',$review);
+			$review['rating'] = empty($review['rating'])?0:$review['rating'];
+			$this->db->insert('reviews',$review);			
+			$this->db->query("update product set review_count = review_count+1,rating=rating+".$review['rating']." where p_id=".$review['product_id']);
 			$this->session->set_flashdata('success', 'Thank you for submitting your review.');
 			redirect(base_url()."Pizza/product_info/?pid=".$review['product_id']);
+		}				
+	}
+	private function checkLogin(){
+		if(!getUserId()){
+			$this->session->set_flashdata('error', 'Please login to perform this action.');
+			redirect(base_url()."pizza/login");	
 		}	
 	}
 }

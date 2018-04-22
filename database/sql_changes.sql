@@ -148,3 +148,5 @@ ALTER TABLE `reviews`
 
 ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE `product` ADD `review_count` INT(11) NOT NULL DEFAULT '0' AFTER `p_status`;  
+ALTER TABLE `product` ADD `rating` INT(11) NOT NULL DEFAULT '0' AFTER `review_count`;

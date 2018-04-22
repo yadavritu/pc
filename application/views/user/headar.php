@@ -23,6 +23,7 @@
 	<link href="<?= base_url(); ?>assets_client/free/1.0.0/icon-font.min.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/s/files/1/2487/3424/t/3/assets/social-buttons.scss.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/stylesheets/cs.styles.css" rel="stylesheet" type="text/css" media="all">
+	<link href="<?= base_url(); ?>assets_client/stylesheets/spr.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/stylesheets/font-icon.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/s/files/1/2487/3424/t/3/assets/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
 	<link href="<?= base_url(); ?>assets_client/s/files/1/2487/3424/t/3/assets/cs.animate.css" rel="stylesheet" type="text/css" media="all">

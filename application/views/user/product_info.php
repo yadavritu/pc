@@ -104,7 +104,7 @@
 														<div class="rating-description">
 															<span class="spr-badge" data-rating="5.0"><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" style=""></i>
 															<i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i>
-															<i class="spr-icon spr-icon-star" style=""></i></span><span class="spr-badge-caption">1 review</span>
+															<i class="spr-icon spr-icon-star" style=""></i></span><span class="spr-badge-caption"><?php echo $cart_data[0]->review_count?> review</span>
 															</span>											
 															<span class="review-link"><a href="#review">Write a review</a></span>
 														</div>
@@ -314,16 +314,16 @@
 																			<div class="spr-header">
 																				<h2 class="spr-header-title">Customer Reviews</h2>
 																				<div class="spr-summary" itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate">
-																					<meta itemprop="itemreviewed" content="Chanel, the cheetah">
-																					<meta itemprop="votes" content="1">
+																					<meta itemprop="itemreviewed" content="">
+																					<meta itemprop="votes" content="<?php echo $cart_data[0]->review_count;?>">
 																					<span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating" class="spr-starrating spr-summary-starrating">
-																						<meta itemprop="average" content="5.0">
+																						<meta itemprop="average" content="<?php echo getRating($cart_data[0]->rating,$cart_data[0]->review_count)?>">
 																						<meta itemprop="best" content="5">
 																						<meta itemprop="worst" content="1">
 																						<i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i>
 																					</span>
 																					<span class="spr-summary-caption">
-																						<span class="spr-summary-actions-togglereviews">Based on 1 review</span>
+																						<span class="spr-summary-actions-togglereviews">Based on <?php echo $cart_data[0]->review_count?> review</span>
 																					</span>
 																					<span class="spr-summary-actions">
 																						<a href="#" class="spr-summary-actions-newreview" onclick="active_review_form();return false">Write a review</a>
@@ -357,7 +357,7 @@
 																									<textarea class="spr-form-input spr-form-input-textarea col-md-12" id="review_body" data-product-id="6537875078" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
 																								</div>
 																							</div>
-																							<br><br><br><br>
+																							<br><br><br><br><br><br>
 																							<div class="spr-form-review-body">
 																								<input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
 																							</div>
@@ -368,12 +368,18 @@
 																					<?php foreach($reviews as $review){?>
 																					<div class="spr-review" id="spr-review-">
 																						<div class="spr-review-header">
-																							<span class="spr-starratings spr-review-header-starratings"><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i><i class="spr-icon spr-icon-star" style=""></i></span>
-																							<h3 class="spr-review-header-title"><?php echo $review->title?></h3>
-																							<span class="spr-review-header-byline"><strong><?php echo $review->title?></strong> on <strong><?php echo date("D m,Y H:i")?></strong></span>
+																							<h3 class="spr-review-header-title"><?php echo ucwords($review->name)?></h3>
+																							<span class="spr-starratings spr-review-header-starratings">
+																								<i class="spr-icon spr-icon-star" style=""></i>
+																								<i class="spr-icon spr-icon-star" style=""></i>
+																								<i class="spr-icon spr-icon-star" style=""></i>
+																								<i class="spr-icon spr-icon-star" style=""></i>
+																								<i class="spr-icon spr-icon-star" style=""></i>
+																							</span>
+																							<span class="spr-review-header-byline"><strong><?php echo $review->title?></strong><br><strong><?php echo date("d M, y h:i a")?></strong></span>
 																						</div>
 																						<div class="spr-review-content">
-																							<p class="spr-review-content-body"><?php echo nl2br($review->	body);?></p>
+																							<p class="spr-review-content-body"><?php echo nl2br($review->body);?></p>
 																						</div>
 																						<div class="spr-review-footer hidden">
 																							<a href="#" class="spr-review-reportreview" onclick="SPR.reportReview(7003642);return false" id="report_7003642" data-msg="This review has been reported">Report as Inappropriate</a>
